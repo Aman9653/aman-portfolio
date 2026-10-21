@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 732 520" width="732" height="520" fill="none" role="img" aria-label="Commerce Dashboard preview">
+  <title>Commerce Dashboard</title>
+  <defs>
+    <linearGradient id="projectcommercedashboardsvg-g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#6366F1"/>
+    </linearGradient>
+    <linearGradient id="projectcommercedashboardsvg-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F1730"/>
+      <stop offset="100%" stop-color="#070C1C"/>
+    </linearGradient>
+    <radialGradient id="projectcommercedashboardsvg-glow" cx="30%" cy="20%" r="70%">
+      <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="732" height="520" fill="url(#projectcommercedashboardsvg-bg)"/>
+  <rect width="732" height="520" fill="url(#projectcommercedashboardsvg-glow)"/>
+  <g opacity="0.5" stroke="#22304F" stroke-width="1">
+    <path d="M0 130h732M0 260h732M0 390h732M180 0v520M366 0v520M552 0v520"/>
+  </g>
+
+  <rect x="34" y="34" width="180" height="34" rx="17" fill="#111A33" stroke="#A78BFA" stroke-opacity="0.45"/>
+  <circle cx="56" cy="51" r="6" fill="url(#projectcommercedashboardsvg-g)"/>
+  <rect x="72" y="46" width="118" height="10" rx="5" fill="#94A3B8" fill-opacity="0.6"/>
+
+  
+    <g transform="translate(58 96)">
+      <rect x="0" y="0" width="616" height="330" rx="20" fill="#0B1226" stroke="#334166" stroke-opacity="0.8"/>
+      <rect x="0" y="0" width="616" height="38" rx="20" fill="#131C39"/>
+      <rect x="0" y="24" width="616" height="14" fill="#131C39"/>
+      <circle cx="24" cy="19" r="5" fill="#F87171"/><circle cx="42" cy="19" r="5" fill="#FBBF24"/><circle cx="60" cy="19" r="5" fill="#34D399"/>
+      <rect x="88" y="13" width="180" height="12" rx="6" fill="#0B1226"/>
+
+      <rect x="18" y="56" width="130" height="256" rx="14" fill="#111A33"/>
+      <rect x="34" y="76" width="76" height="9" rx="4.5" fill="#A78BFA" fill-opacity="0.9"/>
+      <rect x="34" y="102" width="96" height="8" rx="4" fill="#475776"/>
+      <rect x="34" y="122" width="76" height="8" rx="4" fill="#475776"/>
+      <rect x="34" y="142" width="88" height="8" rx="4" fill="#475776"/>
+      <rect x="34" y="162" width="64" height="8" rx="4" fill="#475776"/>
+
+      <rect x="166" y="56" width="140" height="76" rx="14" fill="url(#projectcommercedashboardsvg-g)" fill-opacity="0.3" stroke="#A78BFA" stroke-opacity="0.4"/>
+      <rect x="184" y="78" width="46" height="14" rx="7" fill="#E2E8F0" fill-opacity="0.85"/>
+      <rect x="184" y="100" width="72" height="8" rx="4" fill="#94A3B8" fill-opacity="0.6"/>
+
+      <rect x="322" y="56" width="140" height="76" rx="14" fill="#111A33" stroke="#334166" stroke-opacity="0.7"/>
+      <rect x="340" y="78" width="40" height="14" rx="7" fill="#E2E8F0" fill-opacity="0.7"/>
+      <rect x="340" y="100" width="64" height="8" rx="4" fill="#94A3B8" fill-opacity="0.5"/>
+
+      <rect x="478" y="56" width="120" height="76" rx="14" fill="#111A33" stroke="#334166" stroke-opacity="0.7"/>
+      <rect x="496" y="78" width="36" height="14" rx="7" fill="#E2E8F0" fill-opacity="0.7"/>
+      <rect x="496" y="100" width="58" height="8" rx="4" fill="#94A3B8" fill-opacity="0.5"/>
+
+      <rect x="166" y="150" width="432" height="162" rx="14" fill="#111A33" stroke="#334166" stroke-opacity="0.7"/>
+      <path d="M190 288 L246 246 L302 262 L358 208 L414 226 L470 178 L526 196 L574 166" stroke="url(#projectcommercedashboardsvg-g)" stroke-width="3.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M190 288 L246 246 L302 262 L358 208 L414 226 L470 178 L526 196 L574 166 L574 296 L190 296 Z" fill="url(#projectcommercedashboardsvg-g)" fill-opacity="0.16"/>
+      <g fill="#A78BFA">
+        <circle cx="246" cy="246" r="4"/><circle cx="358" cy="208" r="4"/><circle cx="470" cy="178" r="4"/><circle cx="574" cy="166" r="4"/>
+      </g>
+    </g>
+</svg>

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 620" width="520" height="620" fill="none" role="img" aria-label="Portrait of Aman Yadav">
+  <title>Aman Yadav</title>
+  <defs>
+    <linearGradient id="p-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.30"/>
+      <stop offset="55%" stop-color="#6366F1" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#22D3EE" stop-opacity="0.28"/>
+    </linearGradient>
+    <radialGradient id="p-glow" cx="50%" cy="38%" r="58%">
+      <stop offset="0%" stop-color="#A78BFA" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#A78BFA" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="p-hoodie" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#41336F"/>
+      <stop offset="100%" stop-color="#241C40"/>
+    </linearGradient>
+    <linearGradient id="p-hoodie-2" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#5C4A99"/>
+      <stop offset="100%" stop-color="#332750"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="520" height="620" rx="0" fill="url(#p-bg)"/>
+  <ellipse cx="260" cy="250" rx="220" ry="220" fill="url(#p-glow)"/>
+  <circle cx="260" cy="248" r="168" stroke="#A78BFA" stroke-opacity="0.22" stroke-width="1.5" stroke-dasharray="5 9"/>
+
+  <!-- shoulders -->
+  <path d="M92 620c8-118 72-176 168-176s160 58 168 176z" fill="url(#p-hoodie)"/>
+  <path d="M196 452c40-14 88-14 128 0l-14 62c-32-14-68-14-100 0z" fill="url(#p-hoodie-2)"/>
+  <path d="M236 444h48v34h-48z" fill="#E8B48D"/>
+
+  <!-- head -->
+  <path d="M172 314c0-74 40-118 88-118s88 44 88 118-40 132-88 132-88-58-88-132z" fill="#F4C7A4"/>
+  <path d="M170 330c-10-4-18 8-14 22 4 13 15 20 22 17z" fill="#E8B48D"/>
+  <path d="M350 330c10-4 18 8 14 22-4 13-15 20-22 17z" fill="#E8B48D"/>
+
+  <!-- hair -->
+  <path d="M168 316c-6-70 40-116 92-116s90 44 90 106c0 18-4 30-8 38-6-36-24-56-58-64-38-9-78 2-98 26-8 10-14 12-18 10z" fill="#1E1B34"/>
+
+  <!-- glasses -->
+  <g stroke="#2B3350" stroke-width="6" fill="#BFDBFE" fill-opacity="0.32">
+    <rect x="192" y="316" width="60" height="46" rx="14"/>
+    <rect x="268" y="316" width="60" height="46" rx="14"/>
+    <path d="M252 334h16" fill="none"/>
+    <path d="M192 330h-16M328 330h16" fill="none"/>
+  </g>
+
+  <!-- features -->
+  <path d="M254 366v22c0 6 4 10 10 10" stroke="#C98F66" stroke-width="4" stroke-linecap="round" fill="none"/>
+  <path d="M232 412c18 14 42 14 60 0" stroke="#B9825E" stroke-width="6" stroke-linecap="round" fill="none"/>
+
+  <!-- accents -->
+  <g fill="#22D3EE" opacity="0.7">
+    <circle cx="88" cy="176" r="5"/>
+    <circle cx="430" cy="140" r="4"/>
+  </g>
+  <g fill="#A78BFA" opacity="0.7">
+    <circle cx="440" cy="330" r="5"/>
+    <circle cx="70" cy="332" r="4"/>
+  </g>
+</svg>

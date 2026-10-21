@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 732 520" width="732" height="520" fill="none" role="img" aria-label="Live Tracking App preview">
+  <title>Live Tracking App</title>
+  <defs>
+    <linearGradient id="projectlivetrackingsvg-g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8B5CF6"/>
+      <stop offset="100%" stop-color="#6366F1"/>
+    </linearGradient>
+    <linearGradient id="projectlivetrackingsvg-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0F1730"/>
+      <stop offset="100%" stop-color="#070C1C"/>
+    </linearGradient>
+    <radialGradient id="projectlivetrackingsvg-glow" cx="30%" cy="20%" r="70%">
+      <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="732" height="520" fill="url(#projectlivetrackingsvg-bg)"/>
+  <rect width="732" height="520" fill="url(#projectlivetrackingsvg-glow)"/>
+  <g opacity="0.5" stroke="#22304F" stroke-width="1">
+    <path d="M0 130h732M0 260h732M0 390h732M180 0v520M366 0v520M552 0v520"/>
+  </g>
+
+  <rect x="34" y="34" width="180" height="34" rx="17" fill="#111A33" stroke="#A78BFA" stroke-opacity="0.45"/>
+  <circle cx="56" cy="51" r="6" fill="url(#projectlivetrackingsvg-g)"/>
+  <rect x="72" y="46" width="118" height="10" rx="5" fill="#94A3B8" fill-opacity="0.6"/>
+
+  
+    <g transform="translate(58 96)">
+      <rect x="0" y="0" width="616" height="330" rx="20" fill="#0B1226" stroke="#334166" stroke-opacity="0.8"/>
+      <g stroke="#1E2A4D" stroke-width="2">
+        <path d="M0 74h616M0 148h616M0 222h616M0 296h616"/>
+        <path d="M96 0v330M212 0v330M328 0v330M444 0v330M552 0v330"/>
+      </g>
+      <path d="M0 190 L120 168 L212 214 L340 150 L470 196 L616 130" stroke="#2B3A63" stroke-width="14" fill="none" stroke-linecap="round"/>
+      <path d="M0 190 L120 168 L212 214 L340 150 L470 196 L616 130" stroke="url(#projectlivetrackingsvg-g)" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="18 12"/>
+      <g>
+        <circle cx="212" cy="214" r="30" fill="#A78BFA" fill-opacity="0.18"/>
+        <circle cx="212" cy="214" r="12" fill="url(#projectlivetrackingsvg-g)"/>
+        <circle cx="212" cy="214" r="5" fill="#0B1226"/>
+      </g>
+      <path d="M470 196c0-16 12-28 28-28s28 12 28 28c0 20-28 44-28 44s-28-24-28-44z" fill="url(#projectlivetrackingsvg-g)"/>
+      <circle cx="498" cy="194" r="9" fill="#0B1226"/>
+      <rect x="24" y="24" width="216" height="66" rx="16" fill="#111A33" fill-opacity="0.95" stroke="#A78BFA" stroke-opacity="0.4"/>
+      <rect x="42" y="42" width="92" height="10" rx="5" fill="#E2E8F0" fill-opacity="0.85"/>
+      <rect x="42" y="60" width="150" height="8" rx="4" fill="#94A3B8" fill-opacity="0.6"/>
+      <rect x="392" y="252" width="200" height="56" rx="16" fill="#111A33" fill-opacity="0.95" stroke="#334166"/>
+      <rect x="410" y="268" width="72" height="9" rx="4.5" fill="#A78BFA" fill-opacity="0.9"/>
+      <rect x="410" y="284" width="130" height="8" rx="4" fill="#94A3B8" fill-opacity="0.5"/>
+    </g>
+</svg>

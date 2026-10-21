@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>Aman Yadav | React Native &amp; Full Stack Developer</title>
+    <meta
+      name="description"
+      content="Aman Yadav is a React Native and full-stack developer in Mumbai, building reliable mobile apps and MERN web products with accessible user experiences."
+    />
+    <meta name="author" content="Aman Yadav" />
+    <meta name="theme-color" content="#F8FAFC" />
+    <link rel="canonical" href="__SITE_URL__/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Aman Yadav | React Native &amp; Full Stack Developer" />
+    <meta
+      property="og:description"
+      content="Aman Yadav is a React Native and full-stack developer in Mumbai, building reliable mobile apps and MERN web products with accessible user experiences."
+    />
+    <meta property="og:url" content="__SITE_URL__/" />
+    <meta property="og:image" content="__SITE_URL__/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Aman Yadav, React Native and Full Stack Developer" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Aman Yadav | React Native &amp; Full Stack Developer" />
+    <meta
+      name="twitter:description"
+      content="Aman Yadav is a React Native and full-stack developer in Mumbai, building reliable mobile apps and MERN web products with accessible user experiences."
+    />
+    <meta name="twitter:image" content="__SITE_URL__/og-image.png" />
+
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <link rel="preconnect" href="https://api.fontshare.com" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,600,700,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet" />
+
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('ay-theme');
+          var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var theme = stored === 'light' || stored === 'dark' ? stored : prefersDark ? 'dark' : 'light';
+          document.documentElement.classList.toggle('dark', theme === 'dark');
+          document.documentElement.style.colorScheme = theme;
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (error) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to view this portfolio.</noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/index.jsx"></script>
+  </body>
+</html>

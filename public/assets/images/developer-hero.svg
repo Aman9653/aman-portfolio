@@ -1,0 +1,196 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 620" width="720" height="620" fill="none" role="img" aria-label="Developer working at a laptop">
+  <title>Developer at work</title>
+
+  <defs>
+    <linearGradient id="hg-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.20"/>
+      <stop offset="55%" stop-color="#6366F1" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#22D3EE" stop-opacity="0.18"/>
+    </linearGradient>
+    <radialGradient id="hg-glow" cx="50%" cy="42%" r="55%">
+      <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.42"/>
+      <stop offset="100%" stop-color="#8B5CF6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="hg-screen-spill" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#60A5FA" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#60A5FA" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="hg-screen" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#141E3C"/>
+      <stop offset="100%" stop-color="#0B1226"/>
+    </linearGradient>
+    <linearGradient id="hg-hoodie" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#453679"/>
+      <stop offset="100%" stop-color="#241C40"/>
+    </linearGradient>
+    <linearGradient id="hg-hoodie-light" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#5C4A99"/>
+      <stop offset="100%" stop-color="#382B5C"/>
+    </linearGradient>
+    <linearGradient id="hg-desk" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#1C2445"/>
+      <stop offset="50%" stop-color="#28325C"/>
+      <stop offset="100%" stop-color="#1A2140"/>
+    </linearGradient>
+    <linearGradient id="hg-lid" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#57638C"/>
+      <stop offset="100%" stop-color="#333C5F"/>
+    </linearGradient>
+    <linearGradient id="hg-deck" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#6A76A0"/>
+      <stop offset="100%" stop-color="#414C74"/>
+    </linearGradient>
+    <linearGradient id="hg-card" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#FFFFFF" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#FFFFFF" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="hg-accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#A78BFA"/>
+      <stop offset="60%" stop-color="#60A5FA"/>
+      <stop offset="100%" stop-color="#22D3EE"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ambient backdrop -->
+  <rect x="40" y="30" width="640" height="540" rx="48" fill="url(#hg-bg)"/>
+  <ellipse cx="360" cy="290" rx="290" ry="230" fill="url(#hg-glow)"/>
+  <circle cx="360" cy="290" r="238" stroke="#8B5CF6" stroke-opacity="0.16" stroke-width="1.5" stroke-dasharray="6 10"/>
+  <circle cx="360" cy="290" r="180" stroke="#22D3EE" stroke-opacity="0.12" stroke-width="1.5"/>
+
+  <!-- ================= monitor (left, on the desk) ================= -->
+  <ellipse cx="221" cy="292" rx="180" ry="130" fill="url(#hg-screen-spill)" opacity="0.5"/>
+
+  <g>
+    <rect x="96" y="206" width="250" height="170" rx="14" fill="url(#hg-screen)" stroke="#3D4A78" stroke-width="2"/>
+    <rect x="108" y="218" width="226" height="146" rx="8" fill="#080E20"/>
+    <rect x="108" y="218" width="226" height="24" rx="8" fill="#141E3C"/>
+    <rect x="108" y="234" width="226" height="8" fill="#141E3C"/>
+    <circle cx="122" cy="230" r="4" fill="#F87171"/>
+    <circle cx="136" cy="230" r="4" fill="#FBBF24"/>
+    <circle cx="150" cy="230" r="4" fill="#34D399"/>
+
+    <g>
+      <rect x="120" y="256" width="42" height="7" rx="3.5" fill="#A78BFA"/>
+      <rect x="170" y="256" width="76" height="7" rx="3.5" fill="#60A5FA"/>
+      <rect x="254" y="256" width="30" height="7" rx="3.5" fill="#43527A"/>
+
+      <rect x="132" y="276" width="58" height="7" rx="3.5" fill="#22D3EE"/>
+      <rect x="198" y="276" width="96" height="7" rx="3.5" fill="#43527A"/>
+
+      <rect x="132" y="296" width="34" height="7" rx="3.5" fill="#F0ABFC"/>
+      <rect x="174" y="296" width="64" height="7" rx="3.5" fill="#43527A"/>
+      <rect x="246" y="296" width="44" height="7" rx="3.5" fill="#34D399"/>
+
+      <rect x="144" y="316" width="82" height="7" rx="3.5" fill="#43527A"/>
+      <rect x="234" y="316" width="40" height="7" rx="3.5" fill="#60A5FA"/>
+
+      <rect x="120" y="336" width="52" height="7" rx="3.5" fill="#A78BFA"/>
+      <rect x="180" y="336" width="72" height="7" rx="3.5" fill="#43527A"/>
+    </g>
+
+    <!-- stand -->
+    <path d="M200 376h42l9 96h-60z" fill="#333C5F"/>
+    <rect x="176" y="468" width="90" height="11" rx="5.5" fill="#4A5578"/>
+  </g>
+
+  <!-- ================= person ================= -->
+  <g>
+    <!-- chair back -->
+    <rect x="350" y="308" width="164" height="182" rx="42" fill="#141C38" opacity="0.65"/>
+
+    <!-- neck -->
+    <rect x="414" y="330" width="32" height="52" rx="10" fill="#E0A97F"/>
+
+    <!-- torso -->
+    <path d="M356 490c-6-72 26-116 74-116s80 44 74 116z" fill="url(#hg-hoodie)"/>
+    <path d="M404 380c16-6 36-6 52 0l-8 34c-12-5-24-5-36 0z" fill="url(#hg-hoodie-light)"/>
+    <path d="M410 378l20 26 20-26" stroke="#7C6BB8" stroke-width="3" fill="none" stroke-linecap="round"/>
+
+    <!-- head -->
+    <ellipse cx="430" cy="294" rx="47" ry="51" fill="#F4C7A4"/>
+    <path d="M384 296c-8-2-13 6-10 14 3 9 11 14 16 12z" fill="#E8B48D"/>
+    <path d="M476 296c8-2 13 6 10 14-3 9-11 14-16 12z" fill="#E8B48D"/>
+
+    <!-- hair -->
+    <path d="M382 292c-2-38 20-58 48-58s48 20 48 52c0 8-2 14-4 18-3-20-13-30-30-34-20-5-40 0-50 12-5 6-9 10-12 10z" fill="#1E1B34"/>
+
+    <!-- glasses -->
+    <g stroke="#2B3350" stroke-width="3.5" fill="#BFDBFE" fill-opacity="0.35">
+      <rect x="394" y="286" width="30" height="23" rx="8"/>
+      <rect x="432" y="286" width="30" height="23" rx="8"/>
+      <path d="M424 296h8" fill="none"/>
+      <path d="M394 293h-10M462 293h10" fill="none"/>
+    </g>
+
+    <!-- features -->
+    <path d="M428 312v10c0 4 3 6 7 6" stroke="#C98F66" stroke-width="3" stroke-linecap="round" fill="none"/>
+    <path d="M418 332c8 6 18 6 26 0" stroke="#B9825E" stroke-width="3.5" stroke-linecap="round" fill="none"/>
+  </g>
+
+  <!-- ================= desk ================= -->
+  <rect x="64" y="486" width="592" height="18" rx="9" fill="url(#hg-desk)"/>
+  <rect x="64" y="504" width="592" height="8" rx="4" fill="#101637" opacity="0.7"/>
+
+  <!-- ================= laptop (in front of the person) ================= -->
+  <g>
+    <ellipse cx="430" cy="470" rx="130" ry="26" fill="#22D3EE" opacity="0.12"/>
+    <path d="M356 456l16-104h116l16 104z" fill="url(#hg-lid)"/>
+    <path d="M372 358h100l12 92H360z" fill="#3B456B" opacity="0.55"/>
+    <circle cx="430" cy="404" r="13" fill="url(#hg-accent)" opacity="0.9"/>
+    <circle cx="430" cy="404" r="5" fill="#0B1226"/>
+    <path d="M340 456h180l14 26H326z" fill="url(#hg-deck)"/>
+    <rect x="394" y="466" width="72" height="6" rx="3" fill="#8C99C4" opacity="0.8"/>
+  </g>
+
+  <!-- ================= desk props ================= -->
+  <!-- mug -->
+  <g>
+    <rect x="286" y="456" width="30" height="30" rx="7" fill="#EEF2FF"/>
+    <path d="M316 463h9a8 8 0 0 1 0 16h-9" stroke="#EEF2FF" stroke-width="4" fill="none"/>
+    <path d="M294 448c2-6-2-9 0-14M304 448c2-6-2-9 0-14" stroke="#94A3B8" stroke-width="2.5" stroke-linecap="round" opacity="0.65"/>
+  </g>
+
+  <!-- plant -->
+  <g>
+    <path d="M600 456v-30" stroke="#34D399" stroke-width="3" stroke-linecap="round"/>
+    <path d="M600 432c-16-6-22-22-18-34 14 2 24 14 24 28z" fill="#34D399" opacity="0.9"/>
+    <path d="M600 438c14-8 18-24 13-35-13 4-21 17-19 31z" fill="#22D3EE" opacity="0.75"/>
+    <path d="M584 456h34l-5 30h-24z" fill="#4A5578"/>
+  </g>
+
+  <!-- notebook -->
+  <g opacity="0.9">
+    <rect x="112" y="470" width="70" height="16" rx="4" fill="#3D4A78"/>
+    <rect x="112" y="470" width="70" height="5" rx="2.5" fill="#A78BFA" opacity="0.8"/>
+  </g>
+
+  <!-- ================= floating UI cards ================= -->
+  <g>
+    <rect x="496" y="106" width="152" height="80" rx="18" fill="url(#hg-card)" stroke="#A78BFA" stroke-opacity="0.45"/>
+    <rect x="514" y="124" width="22" height="22" rx="7" fill="url(#hg-accent)"/>
+    <rect x="546" y="126" width="64" height="8" rx="4" fill="#C7D2FE" fill-opacity="0.9"/>
+    <rect x="546" y="139" width="42" height="7" rx="3.5" fill="#94A3B8" fill-opacity="0.7"/>
+    <rect x="514" y="158" width="116" height="7" rx="3.5" fill="#94A3B8" fill-opacity="0.45"/>
+    <rect x="514" y="171" width="80" height="7" rx="3.5" fill="#94A3B8" fill-opacity="0.3"/>
+  </g>
+
+  <g>
+    <rect x="62" y="96" width="146" height="70" rx="18" fill="url(#hg-card)" stroke="#22D3EE" stroke-opacity="0.45"/>
+    <rect x="80" y="112" width="48" height="7" rx="3.5" fill="#94A3B8" fill-opacity="0.65"/>
+    <path d="M80 148l24-22 18 14 20-24 24 20" stroke="url(#hg-accent)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <circle cx="166" cy="136" r="4" fill="#22D3EE"/>
+  </g>
+
+  <!-- sparkles -->
+  <g fill="#A78BFA">
+    <circle cx="368" cy="132" r="3" opacity="0.7"/>
+    <circle cx="662" cy="286" r="3.5" opacity="0.6"/>
+    <circle cx="86" cy="376" r="2.5" opacity="0.5"/>
+    <circle cx="470" cy="196" r="2.5" opacity="0.55"/>
+  </g>
+  <g fill="#22D3EE">
+    <circle cx="668" cy="196" r="3" opacity="0.6"/>
+    <circle cx="60" cy="256" r="2.5" opacity="0.5"/>
+    <circle cx="330" cy="152" r="3" opacity="0.45"/>
+  </g>
+</svg>
