@@ -24,6 +24,7 @@ import {
 import { getProjectBySlug, projects } from '../data/projects';
 import { defaultTitle, siteUrl, socialPreview } from '../config/site';
 import PhoneShowcase from '../components/ui/PhoneShowcase';
+import LazyImage from '../components/LazyImage';
 import useScrollLock from '../hooks/useScrollLock';
 
 const FEATURE_ICONS = {
@@ -120,17 +121,17 @@ export default function ProjectDetailPage() {
         </dl>
 
         <figure className="mt-8 overflow-hidden rounded-3xl border border-line bg-card shadow-card">
-          <img
+          <LazyImage
             src={project.coverImage}
             alt={project.coverAlt}
             width={project.coverWidth}
             height={project.coverHeight}
-            fetchPriority="high"
-            decoding="async"
+            priority
+            wrapperClassName="w-full"
             className={
               project.slug === 'djobzy'
-                ? 'mx-auto max-h-[38rem] max-w-full object-contain'
-                : 'max-h-[38rem] w-full object-cover'
+                ? 'mx-auto block max-h-[38rem] max-w-full object-contain'
+                : 'block max-h-[38rem] w-full object-cover'
             }
           />
           <figcaption className="border-t border-line px-4 py-3 text-xs text-content-subtle">{project.coverAlt}</figcaption>
@@ -147,20 +148,28 @@ export default function ProjectDetailPage() {
           </section>
         </div>
 
-        {project.slug === 'livio-live' && (
+        {project.phoneScreenshots.length > 0 && (
           <section className="mt-14 rounded-3xl border border-line bg-card-alt/60 py-7 sm:py-9" aria-labelledby="mobile-app-heading">
             <div className="px-5 text-center sm:px-8">
-              <h2 id="mobile-app-heading" className="font-display text-2xl font-bold">Livio Live Mobile App</h2>
-              <p className="mt-2 text-sm text-content-muted">TODO: replace the phone placeholders with real WebP app screenshots.</p>
+              <h2 id="mobile-app-heading" className="font-display text-2xl font-bold">
+                {project.title.split(' - ')[0]} Mobile App
+              </h2>
+              <p className="mt-2 text-sm text-content-muted">A look at the {project.title.split(' - ')[0]} mobile app.</p>
             </div>
             <div className="mt-5">
-              <PhoneShowcase screenshots={project.phoneScreenshots} />
+              <PhoneShowcase
+                screenshots={project.phoneScreenshots}
+                compact={project.phoneScreenshots.length > 3}
+                label={`${project.title.split(' - ')[0]} mobile app screenshots`}
+              />
             </div>
-            <div className="mt-5 flex flex-wrap justify-center gap-3 px-5">
-              {project.appStoreUrl && <ExternalLink href={project.appStoreUrl}>Download on the App Store</ExternalLink>}
-              {project.googlePlayUrl && <ExternalLink href={project.googlePlayUrl}>Get it on Google Play</ExternalLink>}
-              {project.liveUrl && <ExternalLink href={project.liveUrl}>Visit Website</ExternalLink>}
-            </div>
+            {(project.appStoreUrl || project.googlePlayUrl || project.liveUrl) && (
+              <div className="mt-5 flex flex-wrap justify-center gap-3 px-5">
+                {project.appStoreUrl && <ExternalLink href={project.appStoreUrl}>Download on the App Store</ExternalLink>}
+                {project.googlePlayUrl && <ExternalLink href={project.googlePlayUrl}>Get it on Google Play</ExternalLink>}
+                {project.liveUrl && <ExternalLink href={project.liveUrl}>Visit Website</ExternalLink>}
+              </div>
+            )}
           </section>
         )}
 
@@ -228,14 +237,13 @@ export default function ProjectDetailPage() {
                     className="group block w-full overflow-hidden rounded-2xl border border-line bg-card text-left"
                     aria-label={`Enlarge ${screenshot.alt}`}
                   >
-                    <img
+                    <LazyImage
                       src={screenshot.src}
                       alt={screenshot.alt}
                       width={screenshot.width || 1200}
                       height={screenshot.height || 800}
-                      loading="lazy"
-                      decoding="async"
-                      className="aspect-video w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+                      wrapperClassName="aspect-video w-full"
+                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                     />
                     <span className="block p-3 text-xs text-content-muted">{screenshot.caption}</span>
                   </button>
@@ -244,7 +252,7 @@ export default function ProjectDetailPage() {
             </ul>
           ) : (
             <p className="mt-4 rounded-2xl border border-dashed border-line-strong p-5 text-sm text-content-muted">
-              {project.screenshotsTodo} in <code>src/data/projects.js</code>.
+              {project.screenshotsTodo || 'TODO: add real project screenshots'} in <code>src/data/projects.js</code>.
             </p>
           )}
         </section>
@@ -296,12 +304,14 @@ export default function ProjectDetailPage() {
               <LuX aria-hidden="true" />
             </button>
             <figure className="max-h-full max-w-6xl">
-              <img
+              <LazyImage
                 src={project.screenshots[activeScreenshot].src}
                 alt={project.screenshots[activeScreenshot].alt}
                 width={project.screenshots[activeScreenshot].width || 1200}
                 height={project.screenshots[activeScreenshot].height || 800}
-                className="max-h-[80vh] w-auto rounded-xl object-contain"
+                wrapperClassName="mx-auto max-h-[80vh] w-fit rounded-xl"
+                className="block max-h-[80vh] max-w-full w-auto rounded-xl object-contain"
+                loading="eager"
               />
               <figcaption className="mt-3 text-center text-sm text-white/80">
                 {project.screenshots[activeScreenshot].caption}

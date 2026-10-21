@@ -2,6 +2,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { profile } from '../data/site';
 import useScrollLock from '../hooks/useScrollLock';
+import Skeleton from './Skeleton';
 
 const INTRO_CONFIG = {
   name: 'AMAN YADAV',
@@ -20,6 +21,7 @@ export default function IntroScreen({ onExitStart, onComplete }) {
   const reduceMotion = useReducedMotion() === true;
   const [isExiting, setIsExiting] = useState(false);
   const [buttonReady, setButtonReady] = useState(reduceMotion);
+  const [portraitLoaded, setPortraitLoaded] = useState(false);
   const buttonRef = useRef(null);
   const exitStarted = useRef(false);
 
@@ -116,7 +118,7 @@ export default function IntroScreen({ onExitStart, onComplete }) {
             animate={{ letterSpacing: '0.015em' }}
             transition={{ duration: reduceMotion ? 0 : 0.8, delay: characterDelay, ease: EASE }}
           >
-            {INTRO_CONFIG.name.split('').map((character, index) => (
+            {'AMAN YADAV'.split('').map((character, index) => (
               <motion.span
                 key={`${character}-${index}`}
                 aria-hidden="true"
@@ -143,21 +145,31 @@ export default function IntroScreen({ onExitStart, onComplete }) {
           </motion.p>
         </header>
 
-        <motion.img
-          src={INTRO_CONFIG.image}
-          alt="Portrait of Aman Yadav"
-          fetchPriority="high"
-          decoding="async"
-          className="absolute bottom-0 left-1/2 z-[1] h-[50vh] w-[72vw] max-w-none object-cover sm:h-[60vh] sm:w-[min(400px,76vw)]"
+        <motion.div
+          className="absolute bottom-0 left-1/2 z-[1] h-[50vh] w-[72vw] max-w-none sm:h-[60vh] sm:w-[min(400px,76vw)]"
           style={{
-            objectPosition: 'center 18%',
             maskImage: 'radial-gradient(ellipse 58% 76% at 50% 44%, #000 62%, transparent 100%)',
             WebkitMaskImage: 'radial-gradient(ellipse 58% 76% at 50% 44%, #000 62%, transparent 100%)',
           }}
           initial={reduceMotion ? false : { opacity: 0, x: '-50%', y: '9%' }}
           animate={{ opacity: 1, x: '-50%', y: 0 }}
           transition={{ duration: reduceMotion ? 0 : 1.5, delay: reduceMotion ? 0 : 2.1, ease: EASE }}
-        />
+        >
+          {!portraitLoaded && (
+            <Skeleton variant="image" className="!absolute inset-0 h-full w-full" rounded={0} />
+          )}
+          <img
+            src={INTRO_CONFIG.image}
+            alt="Portrait of Aman Yadav"
+            fetchPriority="high"
+            decoding="async"
+            onLoad={() => setPortraitLoaded(true)}
+            onError={() => setPortraitLoaded(true)}
+            className={`h-full w-full object-cover object-[center_18%] transition-opacity duration-[400ms] ${
+              portraitLoaded ? 'opacity-100' : 'opacity-0'
+            }`}
+          />
+        </motion.div>
 
         <div
           aria-hidden="true"
@@ -203,14 +215,6 @@ export default function IntroScreen({ onExitStart, onComplete }) {
             Enter portfolio
           </motion.button>
         </div>
-
-        <motion.div
-          aria-hidden="true"
-          className="absolute inset-x-0 bottom-0 z-30 h-[2px] origin-left bg-gradient-to-r from-[#4F46E5] via-[#2563EB] to-[#06B6D4]"
-          initial={{ scaleX: 0 }}
-          animate={{ scaleX: 1 }}
-          transition={{ duration: reduceMotion ? INTRO_CONFIG.reducedMotionDuration / 1000 : 7, ease: 'linear' }}
-        />
       </motion.div>
     </>
   );

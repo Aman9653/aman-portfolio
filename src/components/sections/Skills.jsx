@@ -126,18 +126,19 @@ function SkillCard({ skill, index }) {
       <div className="relative mt-4 h-2 w-full overflow-hidden rounded-full bg-canvas-alt">
         <motion.span
           className="absolute inset-y-0 left-0 rounded-full"
-          style={{ background: `linear-gradient(90deg, ${skill.color}, #8B5CF6)` }}
-          initial={{ width: 0 }}
-          animate={inView && skill.level != null ? { width: `${skill.level}%` } : { width: 0 }}
+          style={{
+            background: `linear-gradient(90deg, ${skill.color}, #8B5CF6)`,
+            width: skill.level != null ? `${skill.level}%` : 0,
+            transformOrigin: 'left',
+          }}
+          initial={{ scaleX: 0 }}
+          animate={inView && skill.level != null ? { scaleX: 1 } : { scaleX: 0 }}
           transition={
             shouldReduce
               ? { duration: 0.001 }
               : { duration: 1.25, ease: EASE, delay: 0.15 + Math.min(index * 0.06, 0.4) }
           }
-        >
-          {/* Travelling sheen on the filled portion */}
-          <span className="absolute inset-0 animate-shimmer bg-brand-sheen bg-shimmer opacity-60" aria-hidden="true" />
-        </motion.span>
+        />
       </div>
     </motion.li>
   );

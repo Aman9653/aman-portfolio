@@ -2,6 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
+.skeleton-shimmer {
+  position: relative;
+  overflow: hidden;
+  background-color: #E2E8F0;
+  transition: background-color 300ms ease;
+}
+
+.skeleton-shimmer::after {
+  position: absolute;
+  inset: 0;
+  width: 60%;
+  content: '';
+  background-color: rgba(255, 255, 255, 0.65);
+  mask-image: linear-gradient(90deg, transparent, #000, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000, transparent);
+  transform: translateX(-170%);
+  animation: skeleton-shimmer 1.6s linear infinite;
+  transition: background-color 300ms ease;
+}
+
+.dark .skeleton-shimmer {
+  background-color: #1F2937;
+}
+
+.dark .skeleton-shimmer::after {
+  background-color: rgba(129, 140, 248, 0.10);
+}
+
+@keyframes skeleton-shimmer {
+  to {
+    transform: translateX(270%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .skeleton-shimmer::after {
+    animation: none;
+    content: none;
+  }
+}
+
 .phone-showcase {
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;

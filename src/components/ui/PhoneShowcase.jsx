@@ -1,7 +1,8 @@
 import { useState } from 'react';
 import cn from '../../lib/cn';
+import LazyImage from '../LazyImage';
 
-export default function PhoneShowcase({ screenshots, compact = false }) {
+export default function PhoneShowcase({ screenshots, compact = false, label = 'Livio Live mobile app screenshots' }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const scrollToPhone = (index) => {
@@ -25,7 +26,7 @@ export default function PhoneShowcase({ screenshots, compact = false }) {
           const itemWidth = event.currentTarget.firstElementChild?.getBoundingClientRect().width || clientWidth;
           setActiveIndex(Math.max(0, Math.min(screenshots.length - 1, Math.round(scrollLeft / (itemWidth + 20)))));
         }}
-        aria-label="Livio Live mobile app screenshots"
+        aria-label={label}
       >
         {screenshots.map((screenshot, index) => (
           <div
@@ -40,14 +41,13 @@ export default function PhoneShowcase({ screenshots, compact = false }) {
             <span className="phone-notch absolute left-1/2 top-1.5 z-10 h-4 w-20 -translate-x-1/2 rounded-full bg-slate-950" />
             <div className="relative aspect-[9/19] overflow-hidden rounded-[1.8rem] bg-gradient-to-br from-indigo-500/20 via-card to-blue-500/20">
               {screenshot.src ? (
-                <img
+                <LazyImage
                   src={screenshot.src}
                   alt={screenshot.alt}
                   width={screenshot.width || 360}
                   height={screenshot.height || 760}
-                  loading="lazy"
-                  decoding="async"
                   className="h-full w-full object-cover"
+                  wrapperClassName="absolute inset-0 h-full w-full rounded-[1.8rem]"
                 />
               ) : (
                 <div className="flex h-full flex-col items-center justify-center gap-3 p-5 text-center">

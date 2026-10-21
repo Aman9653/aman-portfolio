@@ -7,7 +7,6 @@ import {
   LuMapPin,
   LuCircleCheck,
   LuSend,
-  LuLoader,
   LuCircleAlert,
   LuArrowUpRight,
   LuLinkedin,
@@ -21,6 +20,7 @@ import Section from '../ui/Section';
 import SectionHeading from '../ui/SectionHeading';
 import Reveal, { RevealGroup, RevealItem } from '../ui/Reveal';
 import SocialLinks from '../ui/SocialLinks';
+import Skeleton from '../Skeleton';
 
 const CHANNEL_ICONS = { mail: LuMail, phone: LuPhone, pin: LuMapPin, check: LuCircleCheck };
 
@@ -284,6 +284,7 @@ export default function Contact() {
             <button
               type="submit"
               disabled={status === 'sending'}
+              aria-busy={status === 'sending'}
               className="btn btn-primary group relative mt-6 w-full disabled:cursor-not-allowed disabled:opacity-80"
             >
               <AnimatePresence mode="wait" initial={false}>
@@ -297,8 +298,12 @@ export default function Contact() {
                 >
                   {status === 'sending' && (
                     <>
-                      <LuLoader className="animate-spin" aria-hidden="true" />
-                      Sending…
+                      <Skeleton
+                        variant="button"
+                        className="!absolute inset-0 z-0 h-full w-full !bg-transparent"
+                        rounded="inherit"
+                      />
+                      <span className="relative z-10">Sending...</span>
                     </>
                   )}
                   {status === 'sent' && (

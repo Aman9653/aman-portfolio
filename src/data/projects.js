@@ -1,4 +1,40 @@
 const todo = 'TODO: replace with real details';
+const livioScreenshots = [1, 2, 3, 4].map((screen) => ({
+  src: `/images/projects/livio-live-screen-${screen}.jpg`,
+  alt: `Livio Live mobile app screenshot ${screen}`,
+  caption: `Livio Live mobile app — screen ${screen}`,
+  label: `Livio Live app screen ${screen}`,
+  width: 768,
+  height: 1661,
+}));
+const djobzyScreenshots = [
+  {
+    screen: 1,
+    caption: 'Djobzy introduction screen',
+    alt: 'Djobzy service marketplace introduction with Hire People, Find Jobs and Offer Services options',
+  },
+  {
+    screen: 2,
+    caption: 'Find jobs in seconds',
+    alt: 'Djobzy job listings with job search, categories and favorite jobs',
+  },
+  {
+    screen: 4,
+    caption: 'Post a job in 2 minutes',
+    alt: 'Djobzy job posting flow and job published confirmation',
+  },
+  {
+    screen: 3,
+    caption: 'Hire skilled professionals',
+    alt: 'Djobzy professional profiles and service marketplace',
+  },
+].map(({ screen, ...screenshot }) => ({
+  ...screenshot,
+  src: `/images/projects/djobzy-screen-${screen}.jpg`,
+  label: screenshot.caption,
+  width: 333,
+  height: 592,
+}));
 
 export const projects = [
   {
@@ -36,14 +72,10 @@ export const projects = [
       'Removed duplicate API requests to improve page loading.',
     ],
     techStack: ['React Native', 'TypeScript', 'Next.js', 'PHP', 'MySQL', 'Mapbox', 'Expo', 'AWS S3'],
-    screenshots: [],
-    screenshotsTodo: 'TODO: add real WebP app screenshots',
+    screenshots: livioScreenshots,
+    screenshotsTodo: '',
     githubTodo: 'TODO: add the GitHub repository URL if it is public',
-    phoneScreenshots: [
-      { src: '', alt: 'TODO: replace with a real Livio Live app screenshot', label: 'TODO: Add app screenshot' },
-      { src: '', alt: 'TODO: replace with a real Livio Live app screenshot', label: 'TODO: Add app screenshot' },
-      { src: '', alt: 'TODO: replace with a real Livio Live app screenshot', label: 'TODO: Add app screenshot' },
-    ],
+    phoneScreenshots: livioScreenshots,
     results: [
       'Delivered sports event management and participant tracking on Mapbox maps.',
       'Improved API performance and reduced page load times through query indexing and pagination improvements.',
@@ -83,10 +115,10 @@ export const projects = [
       'Managed app state with Zustand.',
     ],
     techStack: ['React Native', 'Expo', 'JavaScript', 'Laravel', 'MySQL', 'Zustand', 'Sanctum'],
-    screenshots: [],
-    screenshotsTodo: 'TODO: add real WebP app screenshots',
+    screenshots: djobzyScreenshots,
+    screenshotsTodo: '',
     githubTodo: 'TODO: add the GitHub repository URL if it is public',
-    phoneScreenshots: [],
+    phoneScreenshots: djobzyScreenshots,
     results: [
       'Delivered cross-platform mobile UI based on Figma wireframes.',
       'Integrated Laravel REST APIs and data-driven app state.',

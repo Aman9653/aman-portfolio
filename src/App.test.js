@@ -45,7 +45,34 @@ test('renders the dynamic Livio Live project page', async () => {
   expect(
     await screen.findByRole('heading', { name: /livio live - live race tracking & results/i, level: 1 })
   ).toBeInTheDocument();
+  const screenshots = screen.getAllByAltText(/Livio Live mobile app screenshot/);
+  expect(screenshots).toHaveLength(8);
+  expect(screenshots[0]).toHaveAttribute('src', '/images/projects/livio-live-screen-1.jpg');
   expect(screen.getByRole('heading', { name: 'Key Features' })).toBeInTheDocument();
+});
+
+test('renders the supplied Djobzy screenshots in its phone showcase and gallery', async () => {
+  render(
+    <HelmetProvider>
+      <MemoryRouter
+        initialEntries={['/projects/djobzy']}
+        future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+      >
+        <Routes>
+          <Route path="/projects/:slug" element={<ProjectDetailPage />} />
+        </Routes>
+      </MemoryRouter>
+    </HelmetProvider>
+  );
+  expect(
+    await screen.findByRole('heading', { name: /djobzy - global job portal & gig marketplace app/i, level: 1 })
+  ).toBeInTheDocument();
+  const screenshots = screen
+    .getAllByRole('img')
+    .filter((image) => image.getAttribute('src').includes('/djobzy-screen-'));
+  expect(screenshots).toHaveLength(8);
+  expect(screenshots[0]).toHaveAttribute('src', '/images/projects/djobzy-screen-1.jpg');
+  expect(screen.getByRole('heading', { name: 'Djobzy Mobile App' })).toBeInTheDocument();
 });
 
 test('validates the required contact fields inline', async () => {

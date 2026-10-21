@@ -84,7 +84,7 @@ export default function Projects() {
           <div className="px-5 text-center sm:px-8">
             <h3 className="font-display text-xl font-bold text-content-strong sm:text-2xl">Livio Live on mobile</h3>
             <p className="mt-2 text-sm text-content-muted">
-              TODO: replace the phone placeholders with real WebP app screenshots.
+              A look at the Livio Live mobile app.
             </p>
           </div>
           <div className="mt-4">
