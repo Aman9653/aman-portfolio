@@ -32,6 +32,7 @@ function validate(values) {
   if (!values.name.trim()) errors.name = 'Please enter your name.';
   if (!values.email.trim()) errors.email = 'An email is needed so I can reply.';
   else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email)) errors.email = 'That email address looks incomplete.';
+  if (!values.subject.trim()) errors.subject = 'Please enter a subject.';
   if (values.message.trim().length < 10) errors.message = 'Please enter at least 10 characters.';
   return errors;
 }
@@ -77,9 +78,9 @@ export default function Contact() {
       return;
     }
 
-    const serviceId = process.env.VITE_EMAILJS_SERVICE_ID;
-    const templateId = process.env.VITE_EMAILJS_TEMPLATE_ID;
-    const publicKey = process.env.VITE_EMAILJS_PUBLIC_KEY;
+    const serviceId = process.env.VITE_EMAILJS_SERVICE_ID?.trim();
+    const templateId = process.env.VITE_EMAILJS_TEMPLATE_ID?.trim();
+    const publicKey = process.env.VITE_EMAILJS_PUBLIC_KEY?.trim();
     if (!serviceId || !templateId || !publicKey) {
       setStatus('error');
       setStatusMessage("Email delivery isn't configured yet. Something went wrong. Please email me directly.");
@@ -95,8 +96,7 @@ export default function Contact() {
         {
           from_name: values.name.trim(),
           from_email: values.email.trim(),
-          reply_to: values.email.trim(),
-          subject: values.subject.trim() || 'Portfolio inquiry',
+          subject: values.subject.trim(),
           message: values.message.trim(),
         },
         publicKey
@@ -111,7 +111,9 @@ export default function Contact() {
       setStatusMessage("Thanks! I'll reply within 24 hours.");
       setValues(EMPTY_FORM);
     } catch (error) {
-      console.error('EmailJS delivery failed.', error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error('EmailJS delivery failed.', error);
+      }
       setStatus('error');
       setStatusMessage('Something went wrong. Please email me directly.');
     }
