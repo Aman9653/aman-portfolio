@@ -4,6 +4,9 @@
     <loc>__SITE_URL__/</loc>
   </url>
   <url>
+    <loc>__SITE_URL__/privacy</loc>
+  </url>
+  <url>
     <loc>__SITE_URL__/projects/livio-live</loc>
   </url>
   <url>

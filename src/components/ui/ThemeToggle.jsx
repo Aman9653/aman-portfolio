@@ -3,6 +3,8 @@ import { LuSun, LuMoon } from 'react-icons/lu';
 import { useTheme } from '../../theme/ThemeProvider';
 import { EASE } from '../../lib/motion';
 import cn from '../../lib/cn';
+import { trackEvent } from '../../lib/analytics';
+import ANALYTICS_EVENTS from '../../lib/events';
 
 /* Fixed star field so the night side doesn't reshuffle on every render. */
 const STARS = [
@@ -34,7 +36,10 @@ export default function ThemeToggle({ className = '', size = 'md' }) {
   return (
     <button
       type="button"
-      onClick={toggleTheme}
+      onClick={() => {
+        trackEvent(ANALYTICS_EVENTS.THEME_TOGGLE, { new_theme: isDark ? 'light' : 'dark' });
+        toggleTheme();
+      }}
       role="switch"
       aria-checked={isDark}
       aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}

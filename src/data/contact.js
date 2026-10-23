@@ -2,7 +2,7 @@ export const contactDetails = {
   email: 'amanyadav121214@gmail.com',
   phone: '+91 96536 89030',
   location: 'Mumbai, Maharashtra, India',
-  whatsappUrl: `https://wa.me/91XXXXXXXXXX?text=${encodeURIComponent('Hi Aman, I saw your portfolio...')}`,
+  whatsappUrl: `https://wa.me/919653689030?text=${encodeURIComponent('Hi Aman, I saw your portfolio and I would like to talk.')}`,
   linkedinUrl: 'https://www.linkedin.com/in/TODO-replace-with-your-linkedin/',
 };
 

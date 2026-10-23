@@ -7,6 +7,8 @@ import cn from '../../lib/cn';
 import Section from '../ui/Section';
 import SectionHeading from '../ui/SectionHeading';
 import Reveal, { RevealGroup, RevealItem } from '../ui/Reveal';
+import { trackEvent } from '../../lib/analytics';
+import ANALYTICS_EVENTS from '../../lib/events';
 
 export default function Experience() {
   const timelineRef = useRef(null);
@@ -81,7 +83,12 @@ export default function Experience() {
           Want the full history, including tooling and references?
         </p>
         <div className="flex flex-wrap justify-center gap-3">
-          <a href={profile.resumeUrl} download="Aman-Yadav-Resume.pdf" className="btn btn-primary group">
+          <a
+            href={profile.resumeUrl}
+            download="Aman-Yadav-Resume.pdf"
+            onClick={() => trackEvent(ANALYTICS_EVENTS.DOWNLOAD_RESUME)}
+            className="btn btn-primary group"
+          >
             Download Resume
             <LuArrowRight className="transition-transform duration-300 group-hover:translate-x-1" aria-hidden="true" />
           </a>

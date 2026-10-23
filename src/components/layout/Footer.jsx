@@ -3,9 +3,14 @@ import { footer, profile } from '../../data/site';
 import Logo from '../ui/Logo';
 import SocialLinks from '../ui/SocialLinks';
 import Reveal, { RevealGroup, RevealItem } from '../ui/Reveal';
+import { Link } from 'react-router-dom';
+import { useCookieConsent } from '../CookieBanner';
+import { trackEvent } from '../../lib/analytics';
+import ANALYTICS_EVENTS from '../../lib/events';
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const { openSettings } = useCookieConsent();
 
   return (
     <footer className="relative overflow-hidden border-t border-line bg-[#F8FAFC] text-[#64748B] transition-colors duration-300 dark:bg-[#0B1020] dark:text-[#94A3B8]">
@@ -52,6 +57,7 @@ export default function Footer() {
               <RevealItem>
                 <a
                   href={`mailto:${profile.email}`}
+                  onClick={() => trackEvent(ANALYTICS_EVENTS.CLICK_EMAIL)}
                   className="group flex items-center gap-1.5 text-sm text-content-muted transition-colors hover:text-primary"
                 >
                   {profile.email}
@@ -84,7 +90,11 @@ export default function Footer() {
               </RevealItem>
             </RevealGroup>
 
-            <a href="#contact" className="btn btn-primary mt-5 h-10 px-5 text-[13px]">
+            <a
+              href="#contact"
+              onClick={() => trackEvent(ANALYTICS_EVENTS.CLICK_HIRE_ME)}
+              className="btn btn-primary mt-5 h-10 px-5 text-[13px]"
+            >
               Hire Me
             </a>
           </Reveal>
@@ -100,13 +110,28 @@ export default function Footer() {
             <span>Based in Mumbai, India · Open to Full Stack &amp; React Native opportunities</span>
           </p>
 
-          <a
-            href="#home"
-            aria-label="Back to top"
-            className="justify-self-center text-[#64748B] transition-[color,transform] duration-300 hover:-translate-y-0.5 hover:text-content-strong dark:text-[#94A3B8] dark:hover:text-content-strong motion-reduce:transform-none motion-reduce:transition-none md:justify-self-end"
-          >
-            Back to top ↑
-          </a>
+          <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 md:justify-self-end">
+            <Link
+              to="/privacy"
+              className="text-[#64748B] transition-colors hover:text-content-strong dark:text-[#94A3B8] dark:hover:text-content-strong"
+            >
+              Privacy
+            </Link>
+            <button
+              type="button"
+              onClick={openSettings}
+              className="text-[#64748B] transition-colors hover:text-content-strong focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary focus-visible:outline-offset-2 dark:text-[#94A3B8] dark:hover:text-content-strong"
+            >
+              Cookie settings
+            </button>
+            <a
+              href="#home"
+              aria-label="Back to top"
+              className="text-[#64748B] transition-[color,transform] duration-300 hover:-translate-y-0.5 hover:text-content-strong dark:text-[#94A3B8] dark:hover:text-content-strong motion-reduce:transform-none motion-reduce:transition-none"
+            >
+              Back to top ↑
+            </a>
+          </div>
         </div>
       </div>
     </footer>

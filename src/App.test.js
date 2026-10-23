@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { HelmetProvider } from 'react-helmet-async';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import emailjs from '@emailjs/browser';
+import { CookieConsentProvider } from './components/CookieBanner';
 import HomePage from './pages/HomePage';
 import ProjectDetailPage from './pages/ProjectDetailPage';
 import ThemeProvider from './theme/ThemeProvider';
@@ -10,6 +11,13 @@ import Contact from './components/sections/Contact';
 
 jest.mock('./components/ui/DotsBackground', () => () => null);
 jest.mock('@emailjs/browser', () => ({ __esModule: true, default: { send: jest.fn() } }));
+jest.mock('./lib/analytics', () => ({
+  initAnalytics: jest.fn(),
+  setDefaultAnalyticsConsent: jest.fn(),
+  trackEvent: jest.fn(),
+  trackPageView: jest.fn(),
+  updateAnalyticsConsent: jest.fn(),
+}));
 
 beforeEach(() => {
   window.sessionStorage.clear();
@@ -18,13 +26,15 @@ beforeEach(() => {
 
 test('renders the portfolio home page', async () => {
   render(
-    <ThemeProvider>
-      <HelmetProvider>
-        <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-          <HomePage />
-        </MemoryRouter>
-      </HelmetProvider>
-    </ThemeProvider>
+    <CookieConsentProvider>
+      <ThemeProvider>
+        <HelmetProvider>
+          <MemoryRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+            <HomePage />
+          </MemoryRouter>
+        </HelmetProvider>
+      </ThemeProvider>
+    </CookieConsentProvider>
   );
   expect(await screen.findByRole('heading', { name: /aman yadav/i, level: 1 })).toBeInTheDocument();
 });

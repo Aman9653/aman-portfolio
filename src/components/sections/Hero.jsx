@@ -9,6 +9,8 @@ import SocialLinks from '../ui/SocialLinks';
 import SmartImage from '../ui/SmartImage';
 import TechIcon from '../ui/TechIcon';
 import Counter from '../ui/Counter';
+import { trackEvent } from '../../lib/analytics';
+import ANALYTICS_EVENTS from '../../lib/events';
 
 const STAT_ICONS = { box: LuBox, calendar: LuCalendar, graduation: LuGraduationCap, trophy: LuTrophy };
 
@@ -81,7 +83,12 @@ export default function Hero() {
                   aria-hidden="true"
                 />
               </a>
-              <a href={profile.resumeUrl} download="Aman-Yadav-Resume.pdf" className="btn btn-ghost group w-full sm:w-auto">
+              <a
+                href={profile.resumeUrl}
+                download="Aman-Yadav-Resume.pdf"
+                onClick={() => trackEvent(ANALYTICS_EVENTS.DOWNLOAD_RESUME)}
+                className="btn btn-ghost group w-full sm:w-auto"
+              >
                 Download Resume
                 <LuDownload
                   className="transition-transform duration-300 ease-premium group-hover:translate-y-0.5"
@@ -90,6 +97,7 @@ export default function Hero() {
               </a>
               <a
                 href={profile.resumeUrl}
+                onClick={() => trackEvent(ANALYTICS_EVENTS.VIEW_RESUME)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-ghost group w-full sm:w-auto"

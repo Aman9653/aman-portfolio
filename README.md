@@ -127,8 +127,37 @@ backgrounds, borders, shadows and gradients cross-fade rather than snap.
 
 The form validates client-side and sends messages through EmailJS. Copy
 `.env.example` to `.env`, then fill in the service ID, template ID and public
-key. Configure the EmailJS template to accept `from_name`, `from_email`,
-`reply_to`, `subject` and `message`.
+key. In the EmailJS dashboard, create a template with these settings:
+
+- **To Email:** `amanyadav121214@gmail.com`
+- **Subject:** `Portfolio inquiry: {{subject}}`
+- **From Name:** `{{from_name}}`
+- **Reply To:** `{{reply_to}}`
+- **From Email:** use the sender address configured for your EmailJS service.
+
+Use this as the template body:
+
+```text
+You received a new message from your portfolio contact form.
+
+Name: {{from_name}}
+Email: {{from_email}}
+Subject: {{subject}}
+
+Message:
+{{message}}
+```
+
+The form sends `from_name`, `from_email`, `reply_to`, `subject` and `message`.
+Save the template, copy its template ID into `.env`, then send a test message
+through the contact form.
+
+## Analytics and cookies
+
+Set `VITE_GA_ID` in `.env` to your GA4 Measurement ID. Analytics loads only in a
+production build and only after a visitor accepts the cookie banner. Consent can
+be changed later using **Cookie settings** in the footer. The `/privacy` page
+describes the analytics cookies and consent options.
 
 ## Accessibility
 

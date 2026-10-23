@@ -20,6 +20,8 @@ import cn from '../../lib/cn';
 import Section from '../ui/Section';
 import SectionHeading from '../ui/SectionHeading';
 import Reveal, { RevealGroup, RevealItem } from '../ui/Reveal';
+import { trackEvent } from '../../lib/analytics';
+import ANALYTICS_EVENTS from '../../lib/events';
 import SmartImage from '../ui/SmartImage';
 
 const FACT_ICONS = { user: LuUser, mail: LuMail, pin: LuMapPin, clock: LuClock };
@@ -160,7 +162,12 @@ export default function About() {
           </RevealGroup>
 
           <Reveal delay={0.15} className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-            <a href={profile.resumeUrl} download="Aman-Yadav-Resume.pdf" className="btn btn-primary group w-full sm:w-auto">
+            <a
+              href={profile.resumeUrl}
+              download="Aman-Yadav-Resume.pdf"
+              onClick={() => trackEvent(ANALYTICS_EVENTS.DOWNLOAD_RESUME)}
+              className="btn btn-primary group w-full sm:w-auto"
+            >
               Download Resume
               <LuDownload
                 className="transition-transform duration-300 group-hover:translate-y-0.5"
@@ -169,6 +176,7 @@ export default function About() {
             </a>
             <a
               href={profile.resumeUrl}
+              onClick={() => trackEvent(ANALYTICS_EVENTS.VIEW_RESUME)}
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-ghost w-full sm:w-auto"

@@ -4,10 +4,88 @@ import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import ThemeProvider from './theme/ThemeProvider';
 import RouteSkeleton from './components/RouteSkeleton';
+import CookieBanner, { CookieConsentProvider, useCookieConsent } from './components/CookieBanner';
+import { initAnalytics, setDefaultAnalyticsConsent, trackEvent, trackPageView } from './lib/analytics';
+import ANALYTICS_EVENTS from './lib/events';
 
 const HomePage = lazy(() => import('./pages/HomePage'));
 const ProjectDetailPage = lazy(() => import('./pages/ProjectDetailPage'));
 const NotFoundPage = lazy(() => import('./pages/NotFoundPage'));
+const PrivacyPage = lazy(() => import('./pages/PrivacyPage'));
+
+function RouteTracker() {
+  const location = useLocation();
+  const { consent } = useCookieConsent();
+  const trackedLocation = useRef(null);
+  const readyLocation = useRef(null);
+  const sentDepths = useRef(new Set());
+  const path = `${location.pathname}${location.search}`;
+
+  useEffect(() => {
+    setDefaultAnalyticsConsent();
+  }, []);
+
+  useEffect(() => {
+    if (trackedLocation.current !== path) {
+      trackedLocation.current = path;
+      readyLocation.current = null;
+      sentDepths.current = new Set();
+    }
+    let routeReadyFrame = null;
+
+    const trackScrollDepth = () => {
+      if (!document.querySelector('main')) return;
+      const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const percent = scrollableHeight <= 0
+        ? 100
+        : Math.floor((window.scrollY / scrollableHeight) * 100);
+
+      [25, 50, 75, 100].forEach((depth) => {
+        if (percent >= depth && !sentDepths.current.has(depth)) {
+          if (trackEvent(ANALYTICS_EVENTS.SCROLL_DEPTH, { depth_percent: depth })) {
+            sentDepths.current.add(depth);
+          }
+        }
+      });
+    };
+
+    const onRouteReady = (event) => {
+      if (event.detail !== path) return;
+      readyLocation.current = path;
+      if (consent === 'accepted') {
+        routeReadyFrame = window.requestAnimationFrame(() => {
+          initAnalytics();
+          trackPageView(path);
+          trackScrollDepth();
+        });
+      }
+    };
+
+    window.addEventListener('portfolio-route-ready', onRouteReady);
+    if (consent === 'accepted' && readyLocation.current === path) {
+      initAnalytics();
+      trackPageView(path);
+      trackScrollDepth();
+    }
+    if (consent !== 'accepted') {
+      return () => {
+        window.removeEventListener('portfolio-route-ready', onRouteReady);
+        if (routeReadyFrame !== null) window.cancelAnimationFrame(routeReadyFrame);
+      };
+    }
+
+    window.addEventListener('scroll', trackScrollDepth, { passive: true });
+    window.addEventListener('resize', trackScrollDepth);
+    return () => {
+      window.removeEventListener('portfolio-route-ready', onRouteReady);
+      window.removeEventListener('scroll', trackScrollDepth);
+      window.removeEventListener('resize', trackScrollDepth);
+      if (routeReadyFrame !== null) window.cancelAnimationFrame(routeReadyFrame);
+    };
+  }, [consent, path]);
+
+  return null;
+}
 
 function RouteContent() {
   const location = useLocation();
@@ -48,6 +126,11 @@ function RouteContent() {
 
   const handlePageReady = useCallback(() => {
     readyPath.current = location.pathname;
+    window.dispatchEvent(
+      new CustomEvent('portfolio-route-ready', {
+        detail: `${location.pathname}${location.search}`,
+      })
+    );
     window.clearTimeout(showTimer.current);
     if (!skeletonShownAt.current) return;
 
@@ -56,7 +139,7 @@ function RouteContent() {
       skeletonShownAt.current = 0;
       setShowSkeleton(false);
     }, remaining);
-  }, [location.pathname]);
+  }, [location.pathname, location.search]);
 
   return (
     <AnimatePresence mode="wait" initial={false}>
@@ -71,6 +154,7 @@ function RouteContent() {
           <Suspense fallback={null}>
             <Routes location={location}>
               <Route path="/" element={<ReadyPage onReady={handlePageReady} visible={!showSkeleton}><HomePage /></ReadyPage>} />
+              <Route path="/privacy" element={<ReadyPage onReady={handlePageReady} visible={!showSkeleton}><PrivacyPage /></ReadyPage>} />
               <Route path="/projects/:slug" element={<ReadyPage onReady={handlePageReady} visible={!showSkeleton}><ProjectDetailPage /></ReadyPage>} />
               <Route path="*" element={<ReadyPage onReady={handlePageReady} visible={!showSkeleton}><NotFoundPage /></ReadyPage>} />
             </Routes>
@@ -98,12 +182,16 @@ function ReadyPage({ children, onReady, visible }) {
 
 export default function App() {
   return (
-    <ThemeProvider>
-      <HelmetProvider>
-        <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
-          <RouteContent />
-        </BrowserRouter>
-      </HelmetProvider>
-    </ThemeProvider>
+    <CookieConsentProvider>
+      <ThemeProvider>
+        <HelmetProvider>
+          <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
+            <RouteTracker />
+            <RouteContent />
+            <CookieBanner />
+          </BrowserRouter>
+        </HelmetProvider>
+      </ThemeProvider>
+    </CookieConsentProvider>
   );
 }

@@ -21,6 +21,8 @@ import SectionHeading from '../ui/SectionHeading';
 import Reveal, { RevealGroup, RevealItem } from '../ui/Reveal';
 import SocialLinks from '../ui/SocialLinks';
 import Skeleton from '../Skeleton';
+import { trackEvent } from '../../lib/analytics';
+import ANALYTICS_EVENTS from '../../lib/events';
 
 const CHANNEL_ICONS = { mail: LuMail, phone: LuPhone, pin: LuMapPin, check: LuCircleCheck };
 
@@ -110,6 +112,7 @@ export default function Contact() {
       setStatus('sent');
       setStatusMessage("Thanks! I'll reply within 24 hours.");
       setValues(EMPTY_FORM);
+      trackEvent(ANALYTICS_EVENTS.CONTACT_FORM_SUBMIT);
     } catch (error) {
       if (process.env.NODE_ENV === 'development') {
         console.error('EmailJS delivery failed.', error);
@@ -205,6 +208,7 @@ export default function Contact() {
             <div className="relative mt-4 flex flex-wrap gap-2" aria-label="Quick contact">
               <a
                 href={contactDetails.linkedinUrl}
+                onClick={() => trackEvent(ANALYTICS_EVENTS.CLICK_LINKEDIN)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-ghost h-10 px-3 text-xs"
@@ -214,6 +218,7 @@ export default function Contact() {
               </a>
               <a
                 href={contactDetails.whatsappUrl}
+                onClick={() => trackEvent(ANALYTICS_EVENTS.CLICK_WHATSAPP)}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn btn-ghost h-10 px-3 text-xs"
@@ -221,7 +226,11 @@ export default function Contact() {
                 <LuMessageCircle aria-hidden="true" />
                 WhatsApp
               </a>
-              <a href={`mailto:${contactDetails.email}`} className="btn btn-ghost h-10 px-3 text-xs">
+              <a
+                href={`mailto:${contactDetails.email}`}
+                onClick={() => trackEvent(ANALYTICS_EVENTS.CLICK_EMAIL)}
+                className="btn btn-ghost h-10 px-3 text-xs"
+              >
                 <LuMail aria-hidden="true" />
                 Email
               </a>
@@ -351,7 +360,11 @@ export default function Contact() {
                     {statusMessage}{' '}
                     {status === 'error' && statusMessage.includes('Something went wrong') && (
                       <>
-                        <a href={`mailto:${contactDetails.email}`} className="font-semibold underline">
+                        <a
+                          href={`mailto:${contactDetails.email}`}
+                          onClick={() => trackEvent(ANALYTICS_EVENTS.CLICK_EMAIL)}
+                          className="font-semibold underline"
+                        >
                           {contactDetails.email}
                         </a>
                         .
@@ -364,7 +377,11 @@ export default function Contact() {
 
             <p className="relative mt-4 text-center text-xs text-content-subtle">
               Prefer email? Reach me at{' '}
-              <a href={`mailto:${contactDetails.email}`} className="font-medium text-primary hover:underline">
+              <a
+                href={`mailto:${contactDetails.email}`}
+                onClick={() => trackEvent(ANALYTICS_EVENTS.CLICK_EMAIL)}
+                className="font-medium text-primary hover:underline"
+              >
                 {contactDetails.email}
               </a>
             </p>

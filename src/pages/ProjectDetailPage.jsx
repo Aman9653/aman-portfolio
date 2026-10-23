@@ -26,6 +26,8 @@ import { defaultTitle, siteUrl, socialPreview } from '../config/site';
 import PhoneShowcase from '../components/ui/PhoneShowcase';
 import LazyImage from '../components/LazyImage';
 import useScrollLock from '../hooks/useScrollLock';
+import { trackEvent } from '../lib/analytics';
+import ANALYTICS_EVENTS from '../lib/events';
 
 const FEATURE_ICONS = {
   map: LuMapPin,
@@ -167,7 +169,15 @@ export default function ProjectDetailPage() {
               <div className="mt-5 flex flex-wrap justify-center gap-3 px-5">
                 {project.appStoreUrl && <ExternalLink href={project.appStoreUrl}>Download on the App Store</ExternalLink>}
                 {project.googlePlayUrl && <ExternalLink href={project.googlePlayUrl}>Get it on Google Play</ExternalLink>}
-                {project.liveUrl && <ExternalLink href={project.liveUrl}>Visit Website</ExternalLink>}
+                {project.liveUrl && (
+                  <ExternalLink
+                    href={project.liveUrl}
+                    eventName={ANALYTICS_EVENTS.CLICK_LIVE_DEMO}
+                    projectSlug={project.slug}
+                  >
+                    Visit Website
+                  </ExternalLink>
+                )}
               </div>
             )}
           </section>
@@ -259,12 +269,24 @@ export default function ProjectDetailPage() {
 
         <div className="mt-12 flex flex-wrap gap-3">
           {project.liveUrl ? (
-            <ExternalLink href={project.liveUrl}>Live Demo</ExternalLink>
+            <ExternalLink
+              href={project.liveUrl}
+              eventName={ANALYTICS_EVENTS.CLICK_LIVE_DEMO}
+              projectSlug={project.slug}
+            >
+              Live Demo
+            </ExternalLink>
           ) : (
             <span className="btn btn-ghost cursor-not-allowed opacity-70" aria-label="Live demo URL not yet provided">Live Demo — TODO</span>
           )}
           {project.githubUrl ? (
-            <ExternalLink href={project.githubUrl}><LuGithub aria-hidden="true" /> GitHub</ExternalLink>
+            <ExternalLink
+              href={project.githubUrl}
+              eventName={ANALYTICS_EVENTS.CLICK_GITHUB}
+              projectSlug={project.slug}
+            >
+              <LuGithub aria-hidden="true" /> GitHub
+            </ExternalLink>
           ) : (
             <span className="btn btn-ghost cursor-not-allowed opacity-70" aria-label="GitHub URL not yet provided"><LuGithub aria-hidden="true" /> GitHub — TODO</span>
           )}
@@ -353,9 +375,15 @@ function Meta({ label, value }) {
   );
 }
 
-function ExternalLink({ href, children }) {
+function ExternalLink({ href, children, eventName, projectSlug }) {
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer" className="btn btn-primary">
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+      onClick={() => eventName && trackEvent(eventName, { project_slug: projectSlug })}
+      className="btn btn-primary"
+    >
       {children}
       <LuExternalLink aria-hidden="true" />
     </a>

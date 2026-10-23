@@ -3,6 +3,8 @@ import { motion, useReducedMotion } from 'framer-motion';
 import { profile } from '../data/site';
 import useScrollLock from '../hooks/useScrollLock';
 import Skeleton from './Skeleton';
+import { trackEvent } from '../lib/analytics';
+import ANALYTICS_EVENTS from '../lib/events';
 
 const INTRO_CONFIG = {
   name: 'AMAN YADAV',
@@ -31,6 +33,12 @@ export default function IntroScreen({ onExitStart, onComplete }) {
     setIsExiting(true);
     onExitStart();
   }, [onExitStart]);
+
+  const skipIntro = useCallback(() => {
+    if (exitStarted.current) return;
+    trackEvent(ANALYTICS_EVENTS.INTRO_SKIP);
+    beginExit();
+  }, [beginExit]);
 
   useScrollLock(true);
 
@@ -61,12 +69,12 @@ export default function IntroScreen({ onExitStart, onComplete }) {
 
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if (event.key === 'Escape') beginExit();
+      if (event.key === 'Escape') skipIntro();
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [beginExit]);
+  }, [skipIntro]);
 
   function handleAnimationComplete() {
     if (isExiting) onComplete();
@@ -178,7 +186,7 @@ export default function IntroScreen({ onExitStart, onComplete }) {
 
         <button
           type="button"
-          onClick={beginExit}
+          onClick={skipIntro}
           className="absolute right-4 top-[calc(env(safe-area-inset-top)+1rem)] z-20 flex min-h-11 min-w-11 items-center justify-center rounded-full border border-white/35 bg-[#050816]/35 px-4 text-[11px] font-semibold tracking-[0.14em] text-white outline-offset-4 transition-colors hover:border-white/70 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-white sm:right-8"
         >
           SKIP INTRO

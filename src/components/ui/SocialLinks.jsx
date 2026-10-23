@@ -3,6 +3,8 @@ import { LuGithub, LuLinkedin, LuTwitter, LuInstagram, LuMail } from 'react-icon
 import { socials } from '../../data/site';
 import { EASE } from '../../lib/motion';
 import cn from '../../lib/cn';
+import { trackEvent } from '../../lib/analytics';
+import ANALYTICS_EVENTS from '../../lib/events';
 
 const SOCIAL_ICONS = {
   github: LuGithub,
@@ -65,6 +67,10 @@ export default function SocialLinks({
           <Item key={social.id} {...itemProps}>
             <a
               href={social.href}
+              onClick={() => {
+                if (social.id === 'linkedin') trackEvent(ANALYTICS_EVENTS.CLICK_LINKEDIN);
+                if (social.id === 'email') trackEvent(ANALYTICS_EVENTS.CLICK_EMAIL);
+              }}
               target={social.id === 'email' ? undefined : '_blank'}
               rel="noreferrer noopener"
               aria-label={social.label}

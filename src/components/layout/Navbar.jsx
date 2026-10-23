@@ -9,6 +9,8 @@ import cn from '../../lib/cn';
 import Logo from '../ui/Logo';
 import ThemeToggle from '../ui/ThemeToggle';
 import SocialLinks from '../ui/SocialLinks';
+import { trackEvent } from '../../lib/analytics';
+import ANALYTICS_EVENTS from '../../lib/events';
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
@@ -109,7 +111,11 @@ export default function Navbar() {
             <div className="flex items-center gap-2 sm:gap-3">
               <ThemeToggle />
 
-              <a href="#contact" className="btn btn-primary hidden h-10 px-5 text-[13px] lg:inline-flex">
+              <a
+                href="#contact"
+                onClick={() => trackEvent(ANALYTICS_EVENTS.CLICK_HIRE_ME)}
+                className="btn btn-primary hidden h-10 px-5 text-[13px] lg:inline-flex"
+              >
                 Hire Me
                 <LuArrowRight className="transition-transform duration-300 group-hover:translate-x-0.5" aria-hidden="true" />
               </a>
@@ -231,7 +237,14 @@ export default function Navbar() {
               </motion.ul>
 
               <div className="space-y-4 border-t border-line px-5 py-6">
-                <a href="#contact" onClick={handleNavClick} className="btn btn-primary w-full">
+                <a
+                  href="#contact"
+                  onClick={() => {
+                    handleNavClick();
+                    trackEvent(ANALYTICS_EVENTS.CLICK_HIRE_ME);
+                  }}
+                  className="btn btn-primary w-full"
+                >
                   Hire Me
                   <LuArrowRight aria-hidden="true" />
                 </a>

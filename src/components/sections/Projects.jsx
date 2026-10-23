@@ -12,6 +12,8 @@ import SectionHeading from '../ui/SectionHeading';
 import Reveal from '../ui/Reveal';
 import SmartImage from '../ui/SmartImage';
 import PhoneShowcase from '../ui/PhoneShowcase';
+import { trackEvent } from '../../lib/analytics';
+import ANALYTICS_EVENTS from '../../lib/events';
 
 const ACCENT_RING = {
   purple: 'shadow-[0_28px_60px_-32px_rgb(139_92_246/0.75)]',
@@ -91,7 +93,13 @@ export default function Projects() {
             <PhoneShowcase screenshots={getProjectBySlug('livio-live').phoneScreenshots} compact />
           </div>
           <div className="mt-4 flex justify-center">
-            <Link to="/projects/livio-live" className="btn btn-ghost">
+            <Link
+              to="/projects/livio-live"
+              onClick={() =>
+                trackEvent(ANALYTICS_EVENTS.CLICK_PROJECT_DETAILS, { project_slug: 'livio-live' })
+              }
+              className="btn btn-ghost"
+            >
               Explore the mobile app
               <LuArrowRight aria-hidden="true" />
             </Link>
@@ -165,6 +173,10 @@ function ProjectCard({ project, index }) {
               <a
                 key={link.href}
                 href={link.href}
+                onClick={() => {
+                  if (link.label === 'Website') trackEvent(ANALYTICS_EVENTS.CLICK_LIVE_DEMO, { project_slug: project.id });
+                  if (link.label === 'GitHub') trackEvent(ANALYTICS_EVENTS.CLICK_GITHUB, { project_slug: project.id });
+                }}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={link.label}
@@ -193,7 +205,11 @@ function ProjectCard({ project, index }) {
         </ul>
 
         <div className="mt-5 flex items-center justify-between border-t border-line pt-4">
-          <Link to={`/projects/${project.id}`} className="group/btn inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
+          <Link
+            to={`/projects/${project.id}`}
+            onClick={() => trackEvent(ANALYTICS_EVENTS.CLICK_PROJECT_DETAILS, { project_slug: project.id })}
+            className="group/btn inline-flex items-center gap-1.5 text-sm font-semibold text-primary"
+          >
             View Details
             <LuArrowUpRight
               className="transition-transform duration-300 ease-premium group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5"
@@ -208,6 +224,10 @@ function ProjectCard({ project, index }) {
                 <a
                   key={link.href}
                   href={link.href}
+                  onClick={() => {
+                    if (link.label === 'Website') trackEvent(ANALYTICS_EVENTS.CLICK_LIVE_DEMO, { project_slug: project.id });
+                    if (link.label === 'GitHub') trackEvent(ANALYTICS_EVENTS.CLICK_GITHUB, { project_slug: project.id });
+                  }}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={link.label}

@@ -16,6 +16,7 @@ import DotsBackground from '../components/ui/DotsBackground';
 import { socials as contactSocials } from '../data/contact';
 import { defaultDescription, defaultTitle, siteUrl, socialPreview } from '../config/site';
 import { profile } from '../data/site';
+import { useCookieConsent } from '../components/CookieBanner';
 
 const INTRO_STORAGE_KEY = 'aman-portfolio-intro';
 
@@ -31,8 +32,13 @@ export default function HomePage() {
   const [introActive, setIntroActive] = useState(shouldShowIntro);
   const [portfolioEntering, setPortfolioEntering] = useState(!introActive);
   const hadIntro = useRef(introActive);
+  const { setIntroActive: setConsentIntroActive } = useCookieConsent();
   const handleIntroExitStart = useCallback(() => setPortfolioEntering(true), []);
   const handleIntroComplete = useCallback(() => setIntroActive(false), []);
+
+  useEffect(() => {
+    setConsentIntroActive(introActive);
+  }, [introActive, setConsentIntroActive]);
 
   useEffect(() => {
     if (!introActive && hadIntro.current) {
