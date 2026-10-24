@@ -97,8 +97,8 @@ export default function HomePage() {
             ? { opacity: 1, y: 0, scale: 1 }
             : { opacity: 0, y: 14, scale: 0.97 }}
           transition={{
-            duration: introActive && portfolioEntering ? 0.8 : 0.3,
-            delay: 0,
+            duration: introActive && portfolioEntering ? 1 : 0.3,
+            delay: introActive && portfolioEntering ? 0.45 : 0,
             ease: [0.2, 0.8, 0.2, 1],
           }}
           style={{ pointerEvents: introActive ? 'none' : 'auto' }}

@@ -12,8 +12,9 @@ const INTRO_CONFIG = {
 };
 
 const EASE = [0.2, 0.8, 0.2, 1];
+const EXIT_EASE = [0.7, 0, 0.2, 1];
 const STORAGE_KEY = 'aman-portfolio-intro';
-const EXIT_MS = 800;
+const EXIT_MS = 1300;
 
 export default function IntroScreen({ onExitStart, onComplete }) {
   const reduceMotion = useReducedMotion() === true;
@@ -22,6 +23,7 @@ export default function IntroScreen({ onExitStart, onComplete }) {
   const [mobile, setMobile] = useState(() => window.matchMedia('(max-width: 700px)').matches);
   const [nameSettled, setNameSettled] = useState(reduceMotion);
   const [photoRevealed, setPhotoRevealed] = useState(reduceMotion);
+  const [messageSettled, setMessageSettled] = useState(reduceMotion);
   const tiltRef = useRef(null);
   const exitStarted = useRef(false);
 
@@ -156,14 +158,65 @@ export default function IntroScreen({ onExitStart, onComplete }) {
         transition={{ duration: isExiting ? (reduceMotion ? 0.3 : 0.6) : 0 }}
       />
 
+      {!reduceMotion && (
+        <>
+          <motion.div
+            aria-hidden="true"
+            className="absolute inset-y-0 left-0 z-[2] w-1/2 bg-[#050816]"
+            initial={false}
+            animate={{ rotateY: isExiting ? -98 : 0 }}
+            transition={{ duration: 1, delay: isExiting ? 0.2 : 0, ease: EXIT_EASE }}
+            style={{
+              transformOrigin: 'left center',
+              backfaceVisibility: 'hidden',
+              transformStyle: 'preserve-3d',
+            }}
+          >
+            <motion.span
+              className="pointer-events-none absolute inset-y-0 right-0 w-[90px]"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: isExiting ? 0.45 : 0 }}
+              transition={{ duration: 0.35, delay: isExiting ? 0.2 : 0 }}
+              style={{ background: 'linear-gradient(270deg, rgba(79,70,229,.9), transparent)' }}
+            />
+          </motion.div>
+          <motion.div
+            aria-hidden="true"
+            className="absolute inset-y-0 right-0 z-[2] w-1/2 bg-[#050816]"
+            initial={false}
+            animate={{ rotateY: isExiting ? 98 : 0 }}
+            transition={{ duration: 1, delay: isExiting ? 0.2 : 0, ease: EXIT_EASE }}
+            style={{
+              transformOrigin: 'right center',
+              backfaceVisibility: 'hidden',
+              transformStyle: 'preserve-3d',
+            }}
+          >
+            <motion.span
+              className="pointer-events-none absolute inset-y-0 left-0 w-[90px]"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: isExiting ? 0.45 : 0 }}
+              transition={{ duration: 0.35, delay: isExiting ? 0.2 : 0 }}
+              style={{ background: 'linear-gradient(90deg, rgba(79,70,229,.9), transparent)' }}
+            />
+          </motion.div>
+        </>
+      )}
+
       <motion.div
-        className="absolute inset-0 z-[1]"
+        className="absolute inset-0 z-[3]"
         initial={reduceMotion ? false : { opacity: 0, z: mobile ? -140 : -280, rotateX: mobile ? 4 : 7 }}
-        animate={{ opacity: isExiting ? 0 : 1, z: 0, rotateX: 0 }}
+        animate={{
+          opacity: isExiting ? 0 : 1,
+          z: 0,
+          rotateX: 0,
+          scale: isExiting && !reduceMotion ? 1.03 : 1,
+        }}
         transition={{
-          opacity: { duration: isExiting ? (reduceMotion ? 0.3 : 0.5) : 1.8, ease: EASE },
-          z: { duration: reduceMotion ? 0 : 1.8, ease: EASE },
-          rotateX: { duration: reduceMotion ? 0 : 1.8, ease: EASE },
+          opacity: { duration: isExiting ? (reduceMotion ? 0.3 : 0.35) : 1.8, ease: EASE },
+          scale: { duration: isExiting ? (reduceMotion ? 0.3 : 0.35) : 0, ease: EASE },
+          z: { duration: isExiting ? 0 : reduceMotion ? 0 : 1.8, ease: EASE },
+          rotateX: { duration: isExiting ? 0 : reduceMotion ? 0 : 1.8, ease: EASE },
         }}
         style={{ transformStyle: 'preserve-3d' }}
       >
@@ -201,9 +254,9 @@ export default function IntroScreen({ onExitStart, onComplete }) {
             className="absolute inset-0 flex flex-col items-center"
             initial={false}
             animate={isExiting
-              ? { opacity: 0, y: -20, filter: 'blur(5px)' }
+              ? { y: -20, filter: 'blur(5px)' }
               : { opacity: 1, y: 0, filter: 'blur(0px)' }}
-            transition={{ duration: reduceMotion ? 0.3 : 0.5, ease: EASE }}
+            transition={{ duration: reduceMotion ? 0.3 : 0.35, ease: EASE }}
           >
             <motion.h1
               aria-label="Aman Yadav"
@@ -230,11 +283,12 @@ export default function IntroScreen({ onExitStart, onComplete }) {
                     opacity: 0,
                     y: 34,
                     rotateX: -88,
+                    rotateY: -10,
                     filter: lowPower ? 'blur(0px)' : 'blur(8px)',
                   }}
                   animate={isExiting
-                    ? { opacity: 0, y: -20, filter: 'blur(5px)' }
-                    : { opacity: 1, y: 0, rotateX: 0, filter: 'blur(0px)' }}
+                    ? { opacity: 0, y: -20, rotateX: 0, rotateY: 0, filter: 'blur(5px)' }
+                    : { opacity: 1, y: 0, rotateX: 0, rotateY: 0, filter: 'blur(0px)' }}
                   transition={{
                     duration: isExiting ? (reduceMotion ? 0.3 : 0.5) : reduceMotion ? 0 : 0.9,
                     delay: reduceMotion || isExiting ? 0 : 0.2 + index * 0.065,
@@ -281,13 +335,16 @@ export default function IntroScreen({ onExitStart, onComplete }) {
                   opacity: 0,
                   y: '8%',
                   scale: 1.05,
+                  rotateX: 12,
+                  rotateY: -6,
+                  z: -40,
                   clipPath: 'inset(100% 0 0 0)',
                 }}
                 animate={isExiting
-                  ? { opacity: 0, y: -20, filter: 'blur(5px)' }
+                  ? { opacity: 0, y: -20, rotateX: 0, rotateY: 0, z: 0, filter: 'blur(5px)' }
                   : reduceMotion
-                    ? { opacity: 1, y: 0, scale: 1, clipPath: 'inset(0% 0 0 0)' }
-                    : { opacity: 1, y: 0, scale: 1, clipPath: 'inset(0% 0 0 0)' }}
+                    ? { opacity: 1, y: 0, scale: 1, rotateX: 0, rotateY: 0, z: 0, clipPath: 'inset(0% 0 0 0)' }
+                    : { opacity: 1, y: 0, scale: 1, rotateX: 0, rotateY: 0, z: 0, clipPath: 'inset(0% 0 0 0)' }}
                 transition={{
                   duration: isExiting ? (reduceMotion ? 0.3 : 0.5) : reduceMotion ? 0 : 1.3,
                   delay: reduceMotion || isExiting ? 0 : 0.9,
@@ -296,6 +353,8 @@ export default function IntroScreen({ onExitStart, onComplete }) {
                 onAnimationComplete={() => setPhotoRevealed(true)}
                 style={{
                   height: mobile ? '58svh' : 'min(68svh, 700px)',
+                  transformStyle: 'preserve-3d',
+                  backfaceVisibility: 'hidden',
                   willChange: isExiting || photoRevealed || reduceMotion ? 'auto' : 'clip-path, transform, opacity',
                 }}
               >
@@ -316,16 +375,27 @@ export default function IntroScreen({ onExitStart, onComplete }) {
 
             <motion.p
               className="absolute inset-x-5 bottom-[calc(env(safe-area-inset-bottom)+5vh)] z-10 m-0 text-center text-sm font-medium leading-relaxed text-white drop-shadow-[0_2px_12px_rgba(0,0,0,.95)] sm:text-base"
-              initial={reduceMotion ? false : { opacity: 0, y: 8 }}
+              initial={reduceMotion ? false : {
+                opacity: 0,
+                y: 8,
+                rotateX: 18,
+                rotateY: -5,
+                z: -40,
+              }}
               animate={isExiting
-                ? { opacity: 0, y: -20, filter: 'blur(5px)' }
-                : { opacity: 1, y: 0, filter: 'blur(0px)' }}
+                ? { opacity: 0, y: -20, rotateX: 0, rotateY: 0, z: 0, filter: 'blur(5px)' }
+                : { opacity: 1, y: 0, rotateX: 0, rotateY: 0, z: 80, filter: 'blur(0px)' }}
               transition={{
                 duration: isExiting ? (reduceMotion ? 0.3 : 0.5) : reduceMotion ? 0 : 0.7,
                 delay: reduceMotion || isExiting ? 0 : 2.3,
                 ease: EASE,
               }}
-              style={{ z: 80 }}
+              onAnimationComplete={() => setMessageSettled(true)}
+              style={{
+                transformOrigin: 'center bottom',
+                transformStyle: 'preserve-3d',
+                willChange: isExiting || messageSettled || reduceMotion ? 'auto' : 'transform, opacity',
+              }}
             >
               {INTRO_CONFIG.message}
             </motion.p>
@@ -333,14 +403,30 @@ export default function IntroScreen({ onExitStart, onComplete }) {
         </div>
       </motion.div>
 
-      <button
+      <motion.button
         type="button"
         onClick={skipIntro}
         tabIndex={isExiting ? -1 : 0}
+        animate={{ opacity: isExiting ? 0 : 1 }}
+        transition={{ duration: reduceMotion ? 0.3 : 0.35, ease: EASE }}
         className="absolute right-4 top-[calc(env(safe-area-inset-top)+1rem)] z-10 min-h-11 min-w-11 rounded-full px-3 text-xs font-semibold tracking-[0.12em] text-white/75 outline-offset-4 hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-white"
       >
         Skip
-      </button>
+      </motion.button>
+
+      {!reduceMotion && (
+        <motion.div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 left-1/2 z-[5] w-px -translate-x-1/2"
+          initial={{ opacity: 0, scaleY: 0 }}
+          animate={isExiting ? { opacity: 1, scaleY: 1 } : { opacity: 0, scaleY: 0 }}
+          transition={{ duration: 0.2, delay: isExiting ? 0.15 : 0, ease: EASE }}
+          style={{
+            transformOrigin: 'center',
+            background: 'linear-gradient(to bottom, #4F46E5, #06B6D4)',
+          }}
+        />
+      )}
     </motion.div>
   );
 }
