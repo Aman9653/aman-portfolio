@@ -10,7 +10,7 @@ import About from '../components/sections/About';
 import Skills from '../components/sections/Skills';
 import Experience from '../components/sections/Experience';
 import Projects from '../components/sections/Projects';
-import Testimonials from '../components/sections/Testimonials';
+// import Testimonials from '../components/sections/Testimonials';
 import Contact from '../components/sections/Contact';
 import DotsBackground from '../components/ui/DotsBackground';
 import { socials as contactSocials } from '../data/contact';
@@ -111,7 +111,7 @@ export default function HomePage() {
             <Skills />
             <Experience />
             <Projects />
-            <Testimonials />
+            {/* <Testimonials /> */}
             <Contact />
           </main>
           <Footer />

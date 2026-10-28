@@ -40,13 +40,12 @@ export const navLinks = [
   { id: 'skills', label: 'Skills', href: '#skills' },
   { id: 'experience', label: 'Experience', href: '#experience' },
   { id: 'projects', label: 'Projects', href: '#projects' },
-  { id: 'testimonials', label: 'Testimonials', href: '#testimonials' },
   { id: 'contact', label: 'Contact', href: '#contact' },
 ];
 
 export const heroStats = [
   { id: 'projects', value: 3, suffix: '', label: 'Featured Projects', icon: 'box' },
-  { id: 'years', value: 1.5, suffix: '', label: 'Years Experience', icon: 'calendar' },
+  { id: 'years', value: 1.5, suffix: '+', label: 'Years Experience', icon: 'calendar' },
   { id: 'graduation', value: 2024, suffix: '', label: 'BSc IT Graduate', icon: 'graduation' },
   { id: 'cgpa', value: 8.5, decimals: 2, suffix: '', label: 'CGPA', icon: 'trophy' },
 ];
@@ -73,14 +72,14 @@ export const about = {
   eyebrow: 'About Me',
   title: 'Turning ideas into products people actually enjoy using',
   paragraphs: [
-    "I'm a Full Stack Developer with 1.5 years of experience building web and mobile apps. Since September 2025, I have worked as a Software Developer at ENATS Technology LLP. I hold a BSc IT degree from the University of Mumbai with a CGPA of 8.50. My core stack includes React.js, Next.js, React Native, TypeScript, JavaScript, PHP, and MySQL, which I use in my web and mobile development work.",
+    "I'm a Full Stack Developer with 1.5+ years of experience building web and mobile apps. Since September 2025, I have worked as a Software Developer at ENATS Technology LLP. I hold a BSc IT degree from the University of Mumbai with a CGPA of 8.50. My core stack includes React.js, Next.js, React Native, TypeScript, JavaScript, PHP, and MySQL, which I use in my web and mobile development work.",
   ],
-  experienceBadge: { value: '1.5', label: 'Years of Experience' },
+  experienceBadge: { value: '1.5+', label: 'Years of Experience' },
   quickFacts: [
     { id: 'name', label: 'Name', value: 'Aman Yadav', icon: 'user' },
     { id: 'email', label: 'Email', value: contactDetails.email, icon: 'mail' },
     { id: 'location', label: 'Location', value: contactDetails.location, icon: 'pin' },
-    { id: 'experience', label: 'Experience', value: '1.5 Years', icon: 'clock' },
+    { id: 'experience', label: 'Experience', value: '1.5+ Years', icon: 'clock' },
   ],
   strengths: [
     {
