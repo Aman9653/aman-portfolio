@@ -1,145 +1,182 @@
-import { useMemo, useRef, useState } from 'react';
-import { AnimatePresence, motion, useInView, useReducedMotion } from 'framer-motion';
-import { skills, skillCategories, skillHighlights } from '../../data/site';
+import { useEffect, useRef, useState } from 'react';
+import { motion, useInView, useReducedMotion } from 'framer-motion';
+import { skills, skillRows } from '../../data/skills';
 import { EASE } from '../../lib/motion';
-import cn from '../../lib/cn';
-import Section from '../ui/Section';
-import SectionHeading from '../ui/SectionHeading';
-import Reveal, { RevealGroup, RevealItem } from '../ui/Reveal';
-import TechIcon from '../ui/TechIcon';
+import WaveDivider from '../ui/WaveDivider';
+import skillIcons from '../skills/skillIcons';
+import './Skills.css';
+
+const DARK_LOGO_SKILLS = new Set([
+  'nextjs',
+  'github',
+  'react-native-expo',
+  'aws-ec2-s3',
+  'zustand',
+]);
+
+const headingVariants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.12 } },
+};
+
+const headingItemVariants = {
+  hidden: { opacity: 0, y: 18 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: EASE } },
+};
+
+const rowsVariants = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.06 } },
+};
+
+const rowVariants = {
+  hidden: { opacity: 0, y: 22 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: EASE } },
+};
 
 export default function Skills() {
-  const [category, setCategory] = useState('all');
-
-  const visible = useMemo(
-    () => (category === 'all' ? skills : skills.filter((skill) => skill.category === category)),
-    [category]
-  );
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.08 });
+  const shouldReduceMotion = useReducedMotion();
+  const showContent = shouldReduceMotion || isInView;
+  const skillsById = new Map(skills.map((skill) => [skill.id, skill]));
 
   return (
-    <Section id="skills" glow="right" grid>
-      <SectionHeading
-        eyebrow="Skills"
-        title="Technologies I"
-        highlight="work with"
-        description="Languages, frameworks, databases, tools, and core concepts in my toolkit."
-      />
-
-      {/* ------------------------------------------------------- Filters -- */}
-      <Reveal delay={0.1} className="mt-10 flex flex-wrap justify-center gap-2">
-        {skillCategories.map((tab) => {
-          const isActive = category === tab.id;
-          return (
-            <button
-              key={tab.id}
-              type="button"
-              onClick={() => setCategory(tab.id)}
-              aria-pressed={isActive}
-              className={cn(
-                'relative rounded-full px-4 py-2 text-sm font-medium transition-colors duration-300',
-                isActive ? 'text-white' : 'text-content-muted hover:text-content-strong'
-              )}
-            >
-              {isActive && (
-                <motion.span
-                  layoutId="skills-tab"
-                  className="absolute inset-0 rounded-full bg-brand-gradient shadow-glow-sm"
-                  transition={{ type: 'spring', stiffness: 380, damping: 32 }}
-                />
-              )}
-              <span className="relative z-10">{tab.label}</span>
-            </button>
-          );
-        })}
-      </Reveal>
-
-      {/* --------------------------------------------------------- Cards -- */}
-      <motion.ul layout className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-        <AnimatePresence mode="popLayout">
-          {visible.map((skill, index) => (
-            <SkillCard key={skill.id} skill={skill} index={index} />
-          ))}
-        </AnimatePresence>
-      </motion.ul>
-
-      {/* ---------------------------------------------------- Highlights -- */}
-      <RevealGroup className="mt-12 grid grid-cols-2 gap-4 lg:grid-cols-4" stagger={0.08}>
-        {skillHighlights.map((highlight) => (
-          <RevealItem
-            key={highlight.id}
-            className="glass rounded-2xl p-5 text-center transition-transform duration-300 hover:-translate-y-1"
+    <section
+      ref={sectionRef}
+      id="skills"
+      className="skills-section relative w-full overflow-hidden"
+      aria-labelledby="skills-heading"
+    >
+      <div className="shell section-y skills-section-inner relative z-10">
+        <div className="skills-header">
+          <motion.header
+            className="skills-header-copy"
+            variants={headingVariants}
+            initial={shouldReduceMotion ? false : 'hidden'}
+            animate={showContent ? 'show' : 'hidden'}
           >
-            <span className="block font-display text-2xl font-bold text-gradient-static sm:text-3xl">
-              {highlight.value}
-            </span>
-            <span className="mt-1 block text-xs text-content-muted sm:text-[13px]">{highlight.label}</span>
-          </RevealItem>
-        ))}
-      </RevealGroup>
-    </Section>
+            <motion.p className="skills-eyebrow" variants={headingItemVariants}>
+              TECHNICAL CAPABILITIES
+            </motion.p>
+            <motion.h2
+              id="skills-heading"
+              className="skills-heading"
+              variants={headingItemVariants}
+            >
+              Skills &amp; <span className="skills-heading-gradient">Technologies</span>
+            </motion.h2>
+            <motion.p className="skills-subtitle" variants={headingItemVariants}>
+              Focused on building scalable applications with modern tools and technologies.
+            </motion.p>
+          </motion.header>
+          <DesktopTiles />
+        </div>
+
+        <motion.div
+          className="skills-rows"
+          variants={rowsVariants}
+          initial={shouldReduceMotion ? false : 'hidden'}
+          animate={showContent ? 'show' : 'hidden'}
+        >
+          {skillRows.map((row) => (
+            <motion.section
+              key={row.id}
+              className="skills-row"
+              aria-labelledby={`skills-row-${row.id}`}
+              variants={shouldReduceMotion
+                ? { hidden: { opacity: 0 }, show: { opacity: 1, transition: { duration: 0 } } }
+                : rowVariants}
+              style={{
+                '--skills-accent': row.accent,
+                '--skills-accent-light': row.lightAccent,
+              }}
+            >
+              <div className="skills-row-intro">
+                <span className="skills-row-number" aria-hidden="true">{row.number}</span>
+                <span className="skills-row-rule" aria-hidden="true" />
+                <div className="skills-row-copy">
+                  <h3 id={`skills-row-${row.id}`} className="skills-row-title">{row.title}</h3>
+                  <p className="skills-row-description">{row.description}</p>
+                </div>
+              </div>
+
+              <ul className="skills-chip-list" aria-label={`${row.title} skills`}>
+                {row.skillIds.map((skillId) => {
+                  const skill = skillsById.get(skillId);
+                  const Icon = skillIcons[skill.id] || skillIcons[skill.icon];
+
+                  return (
+                    <li
+                      key={skillId}
+                      className="skills-chip"
+                      style={{ '--skill-icon-color': skill.color }}
+                    >
+                      <span
+                        className={`skills-chip-icon${DARK_LOGO_SKILLS.has(skill.id) ? ' skills-chip-icon-theme' : ''}`}
+                        aria-hidden="true"
+                      >
+                        <Icon />
+                      </span>
+                      <span className="skills-chip-name">{skill.name}</span>
+                    </li>
+                  );
+                })}
+              </ul>
+            </motion.section>
+          ))}
+        </motion.div>
+      </div>
+      <WaveDivider className="relative z-10" />
+    </section>
   );
 }
 
-/* -------------------------------------------------------------------------- */
+function DesktopTiles() {
+  const [isDesktop, setIsDesktop] = useState(false);
 
-function SkillCard({ skill, index }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, amount: 0.4 });
-  const shouldReduce = useReducedMotion();
+  useEffect(() => {
+    if (typeof window.matchMedia !== 'function') return undefined;
+
+    const desktopQuery = window.matchMedia('(min-width: 1024px)');
+    const updateMatches = () => setIsDesktop(desktopQuery.matches);
+
+    updateMatches();
+    desktopQuery.addEventListener('change', updateMatches);
+
+    return () => desktopQuery.removeEventListener('change', updateMatches);
+  }, []);
+
+  if (!isDesktop) return null;
+
+  const tiles = [
+    { key: 'react', className: 'skills-tile-react', angle: -8, delay: 0, color: '#FFFFFF' },
+    { key: 'javascript', className: 'skills-tile-javascript', angle: -14, delay: 0.4, color: '#0B1020' },
+    { key: 'typescript', className: 'skills-tile-typescript', angle: 8, delay: 0.8, color: '#FFFFFF' },
+    { key: 'nextjs', className: 'skills-tile-nextjs', angle: -6, delay: 1.2, color: '#FFFFFF' },
+    { key: 'php', className: 'skills-tile-php', angle: 10, delay: 1.6, color: '#282447' },
+  ];
 
   return (
-    <motion.li
-      ref={ref}
-      layout
-      initial={shouldReduce ? { opacity: 0 } : { opacity: 0, y: 24, scale: 0.97 }}
-      animate={shouldReduce ? { opacity: 1 } : { opacity: 1, y: 0, scale: 1 }}
-      exit={shouldReduce ? { opacity: 0 } : { opacity: 0, y: -12, scale: 0.97 }}
-      transition={{ duration: 0.45, ease: EASE, delay: Math.min(index * 0.05, 0.35) }}
-      className="gradient-ring group surface-card surface-card-hover relative overflow-hidden p-5"
-    >
-      {/* Hover wash tinted with the technology's own colour */}
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100"
-        style={{ background: `radial-gradient(120% 90% at 0% 0%, ${skill.color}22, transparent 60%)` }}
-      />
-
-      <div className="relative flex items-center gap-3">
-        <span
-          className="grid h-11 w-11 shrink-0 place-items-center rounded-2xl border border-line text-xl transition-transform duration-300 ease-premium group-hover:scale-110"
-          style={{ color: skill.color, background: `${skill.color}14` }}
-        >
-          <TechIcon name={skill.icon} />
-        </span>
-        <div className="min-w-0 flex-1">
-          <h3 className="truncate font-display text-[15px] font-bold text-content-strong">{skill.name}</h3>
-          <p className="text-xs text-content-subtle">
-            {skillCategories.find((category) => category.id === skill.category)?.label ?? skill.category}
-          </p>
-        </div>
-        {skill.level != null && (
-          <span className="font-display text-sm font-bold text-content-strong tabular-nums">{skill.level}%</span>
-        )}
-      </div>
-
-      {/* Progress: animates 0 → level when the card enters the viewport */}
-      <div className="relative mt-4 h-2 w-full overflow-hidden rounded-full bg-canvas-alt">
-        <motion.span
-          className="absolute inset-y-0 left-0 rounded-full"
-          style={{
-            background: `linear-gradient(90deg, ${skill.color}, #8B5CF6)`,
-            width: skill.level != null ? `${skill.level}%` : 0,
-            transformOrigin: 'left',
-          }}
-          initial={{ scaleX: 0 }}
-          animate={inView && skill.level != null ? { scaleX: 1 } : { scaleX: 0 }}
-          transition={
-            shouldReduce
-              ? { duration: 0.001 }
-              : { duration: 1.25, ease: EASE, delay: 0.15 + Math.min(index * 0.06, 0.4) }
-          }
-        />
-      </div>
-    </motion.li>
+    <div className="skills-tiles" aria-hidden="true">
+      {tiles.map((tile) => {
+        const Icon = skillIcons[tile.key];
+        return (
+          <div
+            key={tile.key}
+            className={`skills-tile ${tile.className}`}
+            style={{
+              '--tile-angle': `${tile.angle}deg`,
+              '--tile-delay': `${tile.delay}s`,
+            }}
+          >
+            <Icon style={{ color: tile.color }} />
+          </div>
+        );
+      })}
+      <span className="skills-tile-dot skills-tile-dot-one" />
+      <span className="skills-tile-dot skills-tile-dot-two" />
+      <span className="skills-tile-dot skills-tile-dot-three" />
+    </div>
   );
 }

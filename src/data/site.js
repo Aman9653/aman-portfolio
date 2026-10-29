@@ -1,5 +1,7 @@
 import { contact, contactDetails, socials } from './contact';
+import { skills } from './skills';
 export { contact, socials };
+export { skills };
 
 /**
  * ============================================================================
@@ -134,53 +136,6 @@ export const about = {
 };
 
 /* --------------------------------------------------------------- SKILLS --- */
-
-export const skillCategories = [
-  { id: 'all', label: 'All' },
-  { id: 'languages', label: 'Languages' },
-  { id: 'frameworks', label: 'Frameworks & Libraries' },
-  { id: 'databases', label: 'Databases' },
-  { id: 'cloud-tools', label: 'Cloud & Tools' },
-  { id: 'core-concepts', label: 'Core Concepts' },
-];
-
-export const skills = [
-  { id: 'javascript', name: 'JavaScript (ES6+)', level: 80, category: 'languages', icon: 'javascript', color: '#F7DF1E' },
-  { id: 'typescript', name: 'TypeScript', level: 85, category: 'languages', icon: 'typescript', color: '#3178C6' },
-  { id: 'php', name: 'PHP', level: 70, category: 'languages', icon: 'php', color: '#777BB4' },
-  { id: 'sql', name: 'SQL', level: 80, category: 'languages', icon: 'database', color: '#00758F' },
-  { id: 'html5', name: 'HTML5', level: 70, category: 'languages', icon: 'html5', color: '#E34F26' },
-  { id: 'css3', name: 'CSS3', level: 90, category: 'languages', icon: 'css', color: '#1572B6' },
-  { id: 'react', name: 'React.js', level: 95, category: 'frameworks', icon: 'react', color: '#61DAFB' },
-  { id: 'nextjs', name: 'Next.js', level: 70, category: 'frameworks', icon: 'nextjs', color: '#000000' },
-  { id: 'react-native-expo', name: 'React Native (Expo)', level: 60, category: 'frameworks', icon: 'react', color: '#7C8CF8' },
-  { id: 'bootstrap', name: 'Bootstrap', level: 60, category: 'frameworks', icon: 'bootstrap', color: '#7952B3' },
-  { id: 'tailwind-css', name: 'Tailwind CSS', level: 50, category: 'frameworks', icon: 'tailwind', color: '#06B6D4' },
-  { id: 'zustand', name: 'Zustand', level: 40, category: 'frameworks', icon: 'layers', color: '#443E38' },
-  { id: 'mysql', name: 'MySQL', level: 72, category: 'databases', icon: 'mysql', color: '#00758F' },
-  { id: 'mongodb', name: 'MongoDB', level: 50, category: 'databases', icon: 'mongodb', color: '#47A248' },
-  { id: 'firebase', name: 'Firebase', level: 80, category: 'databases', icon: 'firebase', color: '#FFA000' },
-  { id: 'aws-ec2-s3', name: 'AWS (EC2, S3)', level: 90, category: 'cloud-tools', icon: 'cloud', color: '#FF9900' },
-  { id: 'apache', name: 'Apache', level: 90, category: 'cloud-tools', icon: 'apache', color: '#D22128' },
-  { id: 'git', name: 'Git', level: 85, category: 'cloud-tools', icon: 'git', color: '#F05032' },
-  { id: 'github', name: 'GitHub', level: 85, category: 'cloud-tools', icon: 'github', color: '#181717' },
-  { id: 'vscode', name: 'VS Code', level: 80, category: 'cloud-tools', icon: 'monitor', color: '#007ACC' },
-  { id: 'postman', name: 'Postman', level: 50, category: 'cloud-tools', icon: 'postman', color: '#FF6C37' },
-  { id: 'figma', name: 'Figma', level: 80, category: 'cloud-tools', icon: 'figma', color: '#F24E1E' },
-  { id: 'docker', name: 'Docker', level: 70, category: 'cloud-tools', icon: 'docker', color: '#2496ED' },
-  { id: 'rest-api-design', name: 'REST API Design', level: 88, category: 'core-concepts', icon: 'api', color: '#3B82F6' },
-  { id: 'mvc-architecture', name: 'MVC Architecture', level: 80, category: 'core-concepts', icon: 'layers', color: '#8B5CF6' },
-  { id: 'jwt-authentication', name: 'JWT Authentication', level: 90, category: 'core-concepts', icon: 'key', color: '#D4A017' },
-  { id: 'crud', name: 'CRUD', level: 80, category: 'core-concepts', icon: 'database', color: '#00758F' },
-  { id: 'code-review', name: 'Code Review', level: 80, category: 'core-concepts', icon: 'review', color: '#14B8A6' },
-];
-
-export const skillHighlights = [
-  { id: 'mobile', value: 'React Native', label: 'Mobile App Development' },
-  { id: 'frontend', value: 'React & Next.js', label: 'Frontend Development' },
-  { id: 'backend', value: 'PHP & MySQL', label: 'Backend Systems' },
-  { id: 'api', value: 'REST APIs', label: 'Full Stack Development' },
-];
 
 /* ----------------------------------------------------------- EXPERIENCE --- */
 
@@ -411,8 +366,6 @@ const site = {
   heroBadges,
   about,
   skills,
-  skillCategories,
-  skillHighlights,
   experience,
   education,
   projects,

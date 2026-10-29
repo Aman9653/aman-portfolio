@@ -1,0 +1,60 @@
+import {
+  SiApache,
+  SiBootstrap,
+  SiCss,
+  SiDocker,
+  SiExpo,
+  SiFigma,
+  SiFirebase,
+  SiGit,
+  SiGithub,
+  SiHtml5,
+  SiJavascript,
+  SiJsonwebtokens,
+  SiMongodb,
+  SiMysql,
+  SiNextdotjs,
+  SiPhp,
+  SiPostman,
+  SiReact,
+  SiTailwindcss,
+  SiTypescript,
+} from 'react-icons/si';
+import { FaAws, FaDatabase } from 'react-icons/fa';
+import { VscVscode } from 'react-icons/vsc';
+import { TbApi, TbSql } from 'react-icons/tb';
+import { LuGitPullRequest, LuLayers, LuTable2 } from 'react-icons/lu';
+
+const skillIcons = {
+  react: SiReact,
+  nextjs: SiNextdotjs,
+  javascript: SiJavascript,
+  typescript: SiTypescript,
+  html5: SiHtml5,
+  css: SiCss,
+  tailwind: SiTailwindcss,
+  bootstrap: SiBootstrap,
+  php: SiPhp,
+  apache: SiApache,
+  mysql: SiMysql,
+  mongodb: SiMongodb,
+  firebase: SiFirebase,
+  git: SiGit,
+  github: SiGithub,
+  postman: SiPostman,
+  figma: SiFigma,
+  docker: SiDocker,
+  cloud: FaAws,
+  monitor: VscVscode,
+  database: FaDatabase,
+  api: TbApi,
+  layers: LuLayers,
+  key: SiJsonwebtokens,
+  review: LuGitPullRequest,
+  sql: TbSql,
+  'react-native-expo': SiExpo,
+  zustand: LuLayers,
+  crud: LuTable2,
+};
+
+export default skillIcons;
